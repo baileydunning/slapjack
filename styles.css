@@ -1,0 +1,17 @@
+body {
+  background: linear-gradient(to left, black, navy);
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
