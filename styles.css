@@ -1,5 +1,9 @@
 body {
   background: linear-gradient(to left, black, navy);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
 }
 
 h1, h2, h3, p {
@@ -53,15 +57,20 @@ button {
   align-items: center;
 }
 
-.middle-div {
-  width: 300px;
+.player-hand {
+  align-content: center;
 }
 
-.player-hand {
+.card-deck {
   align-content: center;
 }
 
 .card {
   width: 170px;
   height: 300px;
+}
+
+.card-active {
+  width: 220px;
+  height: 350px;
 }
