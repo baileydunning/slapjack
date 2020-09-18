@@ -1,0 +1,76 @@
+body {
+  background: linear-gradient(to left, black, navy);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+h1, h2, h3, p {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+button {
+  background: white;
+  font-family: 'Open Sans', sans-serif;
+  color: blue;
+  padding: 5px;
+  margin: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.player-hand {
+  align-content: center;
+}
+
+.card-deck {
+  align-content: center;
+}
+
+.card {
+  width: 170px;
+  height: 300px;
+}
+
+.card-active {
+  width: 220px;
+  height: 350px;
+}
