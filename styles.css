@@ -13,12 +13,12 @@ h1, h2, h3, p {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 600;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 400;
 }
 
@@ -41,7 +41,7 @@ button {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .flex-column {
