@@ -39,3 +39,8 @@ function createPlayer(name) {
     players.push(player2)
   }
 }
+
+function shuffleCards(deck) {
+  var randomCard = Math.floor(Math.random() * deck.length);
+  return deck[randomIndex];
+}
