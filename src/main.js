@@ -42,5 +42,5 @@ function createPlayer(name) {
 
 function shuffleCards(deck) {
   var randomCard = Math.floor(Math.random() * deck.length);
-  return deck[randomIndex];
+  return deck[randomCard];
 }
