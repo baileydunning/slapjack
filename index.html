@@ -7,9 +7,31 @@
   </head>
   <body>
     <h1>Let's Play Slapjack!</h1>
-    <div class="main-container">
+    <section class="main-container flex-row">
+      <div class="left-div flex-column">
+        <div class="player-hand">
+          <img src="./assets/back.png" class="card">
+        </div>
+        <div class="name-submission flex-column">
+          <label><h3>Player 1 Name</h3></label>
+          <input type="text" class="player1-name">
+          <button class="player1-name-submit">Submit</button>
+        </div>
+      </div>
+      <div class="middle-div">
 
-    </div>
+      </div>
+      <div class="right-div flex-column">
+        <div class="player-hand">
+          <img src="./assets/back.png" class="card">
+        </div>
+        <div class="name-submission flex-column">
+          <label><h3>Player 2 Name</h3></label>
+          <input type="text" class="player2-name">
+          <button class="player2-name-submit">Submit</button>
+        </div>
+      </div>
+    </section>
   </body>
   <script type="text/javascript" src="./main.js"></script>
   <script type="text/javascript" src="./player.js"></script>
