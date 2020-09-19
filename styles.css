@@ -13,18 +13,18 @@ h1, h2, h3, p {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 600;
 }
 
 h2 {
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 h3 {
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 p {
@@ -40,8 +40,22 @@ button {
   margin: 10px;
 }
 
+.footer {
+  background-color: #323231;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 80px;
+  border-top: 5px solid #686866;
+  align-content: flex-end;
+  align-items: center;
+  bottom: 0;
+}
+
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .flex-column {
@@ -55,6 +69,10 @@ button {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.form-player2, .form-player1 {
+  margin-top: 30px;
 }
 
 .player-hand {
