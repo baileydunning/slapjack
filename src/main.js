@@ -2,10 +2,10 @@ var player1;
 var player2;
 
 var formPlayer1 = document.querySelector('.form-player1')
-var playerOneNameField = document.querySelector('.player1-name')
-var player1info = document.querySelector('.player1-info')
 var formPlayer2 = document.querySelector('.form-player2')
+var playerOneNameField = document.querySelector('.player1-name')
 var playerTwoNameField = document.querySelector('.player2-name')
+var player1info = document.querySelector('.player1-info')
 var player2info = document.querySelector('.player2-info')
 var gameOn = document.querySelector('.game-on')
 var gameOff = document.querySelector('.game-off')
@@ -38,20 +38,35 @@ function toggleHidden() {
   }
 }
 
+function errorHandling() {
+  if (playerOneNameField.value === '') {
+    console.log('TRUE')
+    return true
+  } else if (playerTwoNameField.value === '') {
+    return true
+  }
+}
+
 function createPlayerOne() {
+  if (errorHandling() === true) {
+    return
+  }
+  var playerOneTitle = document.querySelector('.player1-title')
   toggleHidden(player1info)
   addHidden(formPlayer1)
-  var playerOneTitle = document.querySelector('.player1-title')
-  playerOneTitle.innerText = playerOneNameField.value
   createPlayer(playerOneNameField.value)
+  playerOneTitle.innerText = playerOneNameField.value
 }
 
 function createPlayerTwo() {
+  if (errorHandling() === true) {
+    return
+  }
+  var playerTwoTitle = document.querySelector('.player2-title')
   toggleHidden(player2info)
   addHidden(formPlayer2)
-  var playerTwoTitle = document.querySelector('.player2-title')
-  playerTwoTitle.innerText = playerTwoNameField.value
   createPlayer(playerTwoNameField.value)
+  playerTwoTitle.innerText = playerTwoNameField.value
 }
 
 function createPlayer(name) {
