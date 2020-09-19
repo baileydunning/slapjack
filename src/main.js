@@ -1,11 +1,14 @@
-var players = []
+var player1;
+var player2;
 
 var formPlayer1 = document.querySelector('.form-player1')
 var playerOneNameField = document.querySelector('.player1-name')
 var player1info = document.querySelector('.player1-info')
-var formPlayer2 = document.querySelector('.name-player2')
+var formPlayer2 = document.querySelector('.form-player2')
 var playerTwoNameField = document.querySelector('.player2-name')
 var player2info = document.querySelector('.player2-info')
+
+
 
 function toggleHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -31,16 +34,25 @@ function createPlayerTwo() {
 
 function createPlayer(name) {
   if (name === playerOneNameField.value) {
-    var player1 = new Player(name)
-    players.unshift(player1)
+    player1 = new Player(name)
   }
   if (name === playerTwoNameField.value) {
-    var player2 = new Player(name)
-    players.push(player2)
+    player2 = new Player(name)
   }
 }
 
-function shuffleCards(deck) {
-  var randomCard = Math.floor(Math.random() * deck.length);
-  return deck[randomCard];
+function shuffleCards(cards) {
+  var randomCard = Math.floor(Math.random() * cards.length);
+  return cards[randomCard];
+}
+
+function dealCards() {
+  for (var i = 0; i < deck.length; i++) {
+    var oneCard = shuffleCards(deck)
+    player1.hand.push(oneCard)
+    deck.splice(i, 1)
+    var twoCard = shuffleCards(deck)
+    player2.hand.push(twoCard)
+    deck.splice(i, 1)
+  }
 }
