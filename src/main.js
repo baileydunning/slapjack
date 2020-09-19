@@ -7,6 +7,7 @@ var playerOneNameField = document.querySelector('.player1-name')
 var playerTwoNameField = document.querySelector('.player2-name')
 var player1info = document.querySelector('.player1-info')
 var player2info = document.querySelector('.player2-info')
+var playersSubmitButton = document.querySelector('.player-submit-button')
 var gameOn = document.querySelector('.game-on')
 var gameOff = document.querySelector('.game-off')
 var startGameButton = document.querySelector('.start-game-button')
@@ -24,6 +25,10 @@ document.addEventListener('keydown', function() {
       playerTwoSlap()
     }
   }
+})
+playersSubmitButton.addEventListener('click', function() {
+  createPlayerOne()
+  createPlayerTwo()
 })
 
 function addHidden() {
@@ -53,28 +58,30 @@ function createPlayerOne() {
     console.log('ERROR')
     return
   } else {
-    var playerOneTitle = document.querySelector('.player1-title')
-    toggleHidden(player1info)
-    addHidden(formPlayer1)
-    createPlayer(playerOneNameField.value)
-    playerOneTitle.innerText = playerOneNameField.value
+      var playerOneTitle = document.querySelector('.player1-title')
+      toggleHidden(player1info)
+      addHidden(formPlayer1)
+      createPlayers(playerOneNameField.value)
+      playerOneTitle.innerText = playerOneNameField.value
+    }
   }
-}
 
 function createPlayerTwo() {
   if (errorHandling() === true) {
     console.log('ERROR')
     return
   } else {
-    var playerTwoTitle = document.querySelector('.player2-title')
-    toggleHidden(player2info)
-    addHidden(formPlayer2)
-    createPlayer(playerTwoNameField.value)
-    playerTwoTitle.innerText = playerTwoNameField.value
+      var playerTwoTitle = document.querySelector('.player2-title')
+      toggleHidden(player2info)
+      addHidden(formPlayer2)
+      createPlayers(playerTwoNameField.value)
+      playerTwoTitle.innerText = playerTwoNameField.value
   }
 }
 
-function createPlayer(name) {
+function createPlayers(name) {
+  toggleHidden(startGameButton)
+  addHidden(playersSubmitButton)
   if (name === playerOneNameField.value) {
     player1 = new Player(name)
   }

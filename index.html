@@ -14,7 +14,6 @@
         </div>
         <div class="form-player1 flex-column">
           <input type="text" class="player1-name" placeholder="Player 1 Name">
-          <button class="player1-submit-button" onclick="createPlayerOne()">Create Player</button>
         </div>
         <div class="player1-info hidden">
           <h2 class="player1-title">Player Name</h2>
@@ -35,7 +34,8 @@
               <h3>Player Two Controls</h3>
               <p>Press "P" to deal, "J" to slap</p>
             </div>
-            <button class="start-game-button" onclick="startGame()">START GAME</button>
+            <button class="player-submit-button">ADD PLAYERS</button>
+            <button class="start-game-button hidden" onclick="startGame()">START GAME</button>
           </div>
         </div>
       </div>
@@ -45,7 +45,6 @@
         </div>
         <div class="form-player2 flex-column">
           <input type="text" class="player2-name" placeholder="Player 2 Name">
-          <button class="player2-submit-button" onclick="createPlayerTwo()">Create Player</button>
         </div>
         <div class="player2-info hidden">
           <h2 class="player2-title">Player Name</h2>

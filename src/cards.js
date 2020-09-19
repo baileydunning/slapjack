@@ -1,4 +1,5 @@
 var deck = [
+  // BLUE
   {image: './assets/blue-01.png',
   color: 'blue',
   number: 1},
@@ -38,7 +39,7 @@ var deck = [
   {image: './assets/blue-king.png',
   color: 'blue',
   number: 13},
-
+  // GOLD
   {image: './assets/gold-01.png',
   color: 'gold',
   number: 1},
@@ -78,7 +79,7 @@ var deck = [
   {image: './assets/gold-king.png',
   color: 'gold',
   number: 13},
-
+  // GREEN
   {image: './assets/green-01.png',
   color: 'green',
   number: 1},
@@ -118,7 +119,7 @@ var deck = [
   {image: './assets/green-king.png',
   color: 'green',
   number: 13},
-
+  // RED
   {image: './assets/red-01.png',
   color: 'red',
   number: 1},
