@@ -57,6 +57,10 @@ button {
   align-items: center;
 }
 
+.form-player2, .form-player1 {
+  margin-top: 30px;
+}
+
 .player-hand {
   align-content: center;
 }

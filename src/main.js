@@ -98,7 +98,10 @@ function playerOneDeal() {
 }
 
 function playerOneSlap() {
-  console.log('you pressed F!')
+  console.log('SLAP (P1)')
+  player1.hand = player1.hand.concat(deck)
+  deck = []
+  activeCard.src = "./assets/back.png"
 }
 
 function playerTwoDeal() {
@@ -108,5 +111,8 @@ function playerTwoDeal() {
 }
 
 function playerTwoSlap() {
-  console.log('you pressed J!')
+  console.log('SLAP (P2)')
+  player2.hand = player2.hand.concat(deck)
+  deck = []
+  activeCard.src = "./assets/back.png"
 }
