@@ -26,6 +26,7 @@ document.addEventListener('keydown', function() {
     }
   }
 })
+
 playersSubmitButton.addEventListener('click', function() {
   createPlayerOne()
   createPlayerTwo()
