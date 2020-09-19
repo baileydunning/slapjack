@@ -24,8 +24,12 @@
       </div>
       <div class="middle-div">
         <div class="card-deck flex-column">
-          <img src="./assets/back.png" class="card-active">
-          <button type="button" name="button" class="shuffleButton" onclick="dealCards()">Shuffle</button>
+          <div class="game-on hidden">
+            <img src="./assets/back.png" class="card-active">
+          </div>
+          <div class="game-off">
+            <button class="start-game-button" onclick="startGame()">START GAME</button>
+          </div>
         </div>
       </div>
       <div class="right-div flex-column">

@@ -7,18 +7,30 @@ var player1info = document.querySelector('.player1-info')
 var formPlayer2 = document.querySelector('.form-player2')
 var playerTwoNameField = document.querySelector('.player2-name')
 var player2info = document.querySelector('.player2-info')
+var gameOn = document.querySelector('.game-on')
+var gameOff = document.querySelector('.game-off')
+var startGameButton = document.querySelector('.start-game-button')
+var activeCard = document.querySelector('.card-active')
 
 document.addEventListener('keydown', function() {
-  if (event.code === 'KeyQ') {
-    playerOneDeal()
-  } else if (event.code === 'KeyF') {
-    playerOneSlap()
-  } else if (event.code === 'KeyP') {
-    playerTwoDeal()
-  } else if (event.code === 'KeyJ') {
-    playerTwoSlap()
+  if ((player1 instanceof Player) && (player2 instanceof Player)) {
+    if (event.code === 'KeyQ') {
+      playerOneDeal()
+    } else if (event.code === 'KeyF') {
+      playerOneSlap()
+    } else if (event.code === 'KeyP') {
+      playerTwoDeal()
+    } else if (event.code === 'KeyJ') {
+      playerTwoSlap()
+    }
   }
 })
+
+function addHidden() {
+  for (var i = 0; i < arguments.length; i++) {
+    arguments[i].classList.add('hidden');
+  }
+}
 
 function toggleHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -28,7 +40,7 @@ function toggleHidden() {
 
 function createPlayerOne() {
   toggleHidden(player1info)
-  formPlayer1.classList.add('hidden')
+  addHidden(formPlayer1)
   var playerOneTitle = document.querySelector('.player1-title')
   playerOneTitle.innerText = playerOneNameField.value
   createPlayer(playerOneNameField.value)
@@ -36,7 +48,7 @@ function createPlayerOne() {
 
 function createPlayerTwo() {
   toggleHidden(player2info)
-  formPlayer2.classList.add('hidden')
+  addHidden(formPlayer2)
   var playerTwoTitle = document.querySelector('.player2-title')
   playerTwoTitle.innerText = playerTwoNameField.value
   createPlayer(playerTwoNameField.value)
@@ -58,17 +70,31 @@ function shuffle(cards) {
 
 function dealCards() {
   for (var i = 0; i < deck.length; i++) {
-    var oneCard = shuffle(deck)
-    player1.hand.push(oneCard)
-    deck.splice(i, 1)
-    var twoCard = shuffle(deck)
-    player2.hand.push(twoCard)
-    deck.splice(i, 1)
+    while (deck.length > 0) {
+      var oneCard = shuffle(deck)
+      player1.hand.push(oneCard)
+      deck.splice(i, 1)
+      var twoCard = shuffle(deck)
+      player2.hand.push(twoCard)
+      deck.splice(i, 1)
+    }
+  }
+}
+
+function startGame() {
+  if ((player1 instanceof Player) && (player2 instanceof Player)) {
+    toggleHidden(gameOn)
+    addHidden(gameOff)
+    dealCards()
+  } else {
+    alert('add players')
   }
 }
 
 function playerOneDeal() {
-  console.log('you pressed Q!')
+  activeCard.src = player1.hand[0]
+  deck.push(player1.hand[0])
+  player1.hand.shift()
 }
 
 function playerOneSlap() {
@@ -76,7 +102,9 @@ function playerOneSlap() {
 }
 
 function playerTwoDeal() {
-  console.log('you pressed P!')
+  activeCard.src = player2.hand[0]
+  deck.push(player2.hand[0])
+  player2.hand.shift()
 }
 
 function playerTwoSlap() {
