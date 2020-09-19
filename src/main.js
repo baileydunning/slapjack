@@ -8,7 +8,17 @@ var formPlayer2 = document.querySelector('.form-player2')
 var playerTwoNameField = document.querySelector('.player2-name')
 var player2info = document.querySelector('.player2-info')
 
-
+document.addEventListener('keydown', function() {
+  if (event.code === 'KeyQ') {
+    playerOneDeal()
+  } else if (event.code === 'KeyF') {
+    playerOneSlap()
+  } else if (event.code === 'KeyP') {
+    playerTwoDeal()
+  } else if (event.code === 'KeyJ') {
+    playerTwoSlap()
+  }
+})
 
 function toggleHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -41,18 +51,34 @@ function createPlayer(name) {
   }
 }
 
-function shuffleCards(cards) {
+function shuffle(cards) {
   var randomCard = Math.floor(Math.random() * cards.length);
   return cards[randomCard];
 }
 
 function dealCards() {
   for (var i = 0; i < deck.length; i++) {
-    var oneCard = shuffleCards(deck)
+    var oneCard = shuffle(deck)
     player1.hand.push(oneCard)
     deck.splice(i, 1)
-    var twoCard = shuffleCards(deck)
+    var twoCard = shuffle(deck)
     player2.hand.push(twoCard)
     deck.splice(i, 1)
   }
+}
+
+function playerOneDeal() {
+  console.log('you pressed Q!')
+}
+
+function playerOneSlap() {
+  console.log('you pressed F!')
+}
+
+function playerTwoDeal() {
+  console.log('you pressed P!')
+}
+
+function playerTwoSlap() {
+  console.log('you pressed J!')
 }
