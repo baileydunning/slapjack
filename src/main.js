@@ -40,33 +40,38 @@ function toggleHidden() {
 
 function errorHandling() {
   if (playerOneNameField.value === '') {
-    console.log('TRUE')
     return true
   } else if (playerTwoNameField.value === '') {
     return true
+  } else {
+    return false
   }
 }
 
 function createPlayerOne() {
   if (errorHandling() === true) {
+    console.log('ERROR')
     return
+  } else {
+    var playerOneTitle = document.querySelector('.player1-title')
+    toggleHidden(player1info)
+    addHidden(formPlayer1)
+    createPlayer(playerOneNameField.value)
+    playerOneTitle.innerText = playerOneNameField.value
   }
-  var playerOneTitle = document.querySelector('.player1-title')
-  toggleHidden(player1info)
-  addHidden(formPlayer1)
-  createPlayer(playerOneNameField.value)
-  playerOneTitle.innerText = playerOneNameField.value
 }
 
 function createPlayerTwo() {
   if (errorHandling() === true) {
+    console.log('ERROR')
     return
+  } else {
+    var playerTwoTitle = document.querySelector('.player2-title')
+    toggleHidden(player2info)
+    addHidden(formPlayer2)
+    createPlayer(playerTwoNameField.value)
+    playerTwoTitle.innerText = playerTwoNameField.value
   }
-  var playerTwoTitle = document.querySelector('.player2-title')
-  toggleHidden(player2info)
-  addHidden(formPlayer2)
-  createPlayer(playerTwoNameField.value)
-  playerTwoTitle.innerText = playerTwoNameField.value
 }
 
 function createPlayer(name) {
@@ -107,7 +112,7 @@ function startGame() {
 }
 
 function playerOneDeal() {
-  activeCard.src = player1.hand[0]
+  activeCard.src = player1.hand[0].image
   deck.push(player1.hand[0])
   player1.hand.shift()
 }
@@ -120,7 +125,7 @@ function playerOneSlap() {
 }
 
 function playerTwoDeal() {
-  activeCard.src = player2.hand[0]
+  activeCard.src = player2.hand[0].image
   deck.push(player2.hand[0])
   player2.hand.shift()
 }
