@@ -19,19 +19,11 @@ var footer = document.querySelector('.footer')
 document.addEventListener('keydown', function() {
   if ((player1 instanceof Player) && (player2 instanceof Player)) {
     if (event.code === 'KeyQ') {
-      if (player1.turn === true) {
-        playerOneDeal()
-      } else {
-        console.log('its not p1s turn')
-      }
+      (player1.turn === true) ? playerOneDeal() : console.log('its not your turn')
     } else if (event.code === 'KeyF') {
       playerOneSlap()
     } else if (event.code === 'KeyP') {
-      if (player2.turn === true) {
-        playerTwoDeal()
-      } else {
-        console.log('its not p2s turn')
-      }
+      (player2.turn === true) ? playerTwoDeal() : console.log('its not your turn')
     } else if (event.code === 'KeyJ') {
       playerTwoSlap()
     }
@@ -86,7 +78,6 @@ function createPlayerOne() {
 
 function createPlayerTwo() {
   if (errorHandling() === true) {
-    console.log('ERROR')
     return
   } else {
       var playerTwoTitle = document.querySelector('.player2-title')
@@ -132,8 +123,18 @@ function startGame() {
     toggleHidden(gameOn)
     addHidden(gameOff)
     dealCards()
+    displayPlayerTurn()
   } else {
     alert('add players')
+  }
+}
+
+function displayPlayerTurn() {
+  var turn = document.querySelector('.player-turn')
+  if (player1.turn === true) {
+    turn.innerText = `It's ${player1.name}'s turn!`
+  } else if (player2.turn === true) {
+    turn.innerText = `It's ${player2.name}'s turn!`
   }
 }
 
@@ -145,6 +146,7 @@ function playerOneDeal() {
   updateDeck()
   player1.turn = false
   player2.turn = true
+  displayPlayerTurn()
 }
 
 function playerTwoDeal() {
@@ -155,6 +157,7 @@ function playerTwoDeal() {
   updateDeck()
   player2.turn = false
   player1.turn = true
+  displayPlayerTurn()
 }
 
 function updatePlayer1Hand() {
