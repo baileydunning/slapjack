@@ -19,11 +19,19 @@ var footer = document.querySelector('.footer')
 document.addEventListener('keydown', function() {
   if ((player1 instanceof Player) && (player2 instanceof Player)) {
     if (event.code === 'KeyQ') {
-      playerOneDeal()
+      if (player1.turn === true) {
+        playerOneDeal()
+      } else {
+        console.log('its not p1s turn')
+      }
     } else if (event.code === 'KeyF') {
       playerOneSlap()
     } else if (event.code === 'KeyP') {
-      playerTwoDeal()
+      if (player2.turn === true) {
+        playerTwoDeal()
+      } else {
+        console.log('its not p2s turn')
+      }
     } else if (event.code === 'KeyJ') {
       playerTwoSlap()
     }
@@ -94,10 +102,10 @@ function createPlayers(name) {
   addHidden(playersSubmitButton)
   removeHidden(startGameButton)
   if (name === playerOneNameField.value) {
-    player1 = new Player(name)
+    player1 = new Player(name, true)
   }
   if (name === playerTwoNameField.value) {
-    player2 = new Player(name)
+    player2 = new Player(name, false)
   }
 }
 
@@ -130,19 +138,23 @@ function startGame() {
 }
 
 function playerOneDeal() {
-  activeCard.src = player1.hand[0].image
+  activeCard.src = player1.hand[0].image || './assets/back.png'
   deck.push(player1.hand[0])
   player1.hand.shift()
   updatePlayer1Hand()
   updateDeck()
+  player1.turn = false
+  player2.turn = true
 }
 
 function playerTwoDeal() {
-  activeCard.src = player2.hand[0].image
+  activeCard.src = player2.hand[0].image || './assets/back.png'
   deck.push(player2.hand[0])
   player2.hand.shift()
   updatePlayer2Hand()
   updateDeck()
+  player2.turn = false
+  player1.turn = true
 }
 
 function updatePlayer1Hand() {
