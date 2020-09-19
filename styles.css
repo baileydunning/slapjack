@@ -40,14 +40,14 @@ button {
   margin: 10px;
 }
 
-footer {
+.footer {
   background-color: #323231;
   width: 100%;
   position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 100px;
+  height: 80px;
   border-top: 5px solid #686866;
   align-content: flex-end;
   align-items: center;

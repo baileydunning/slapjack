@@ -7,11 +7,14 @@ var playerOneNameField = document.querySelector('.player1-name')
 var playerTwoNameField = document.querySelector('.player2-name')
 var player1info = document.querySelector('.player1-info')
 var player2info = document.querySelector('.player2-info')
+var player2hand = document.querySelector('.player2-hand')
 var playersSubmitButton = document.querySelector('.player-submit-button')
 var gameOn = document.querySelector('.game-on')
 var gameOff = document.querySelector('.game-off')
 var startGameButton = document.querySelector('.start-game-button')
 var activeCard = document.querySelector('.card-active')
+var footer = document.querySelector('.footer')
+
 
 document.addEventListener('keydown', function() {
   if ((player1 instanceof Player) && (player2 instanceof Player)) {
@@ -35,6 +38,12 @@ playersSubmitButton.addEventListener('click', function() {
 function addHidden() {
   for (var i = 0; i < arguments.length; i++) {
     arguments[i].classList.add('hidden');
+  }
+}
+
+function removeHidden() {
+  for (var i = 0; i < arguments.length; i++) {
+    arguments[i].classList.remove('hidden');
   }
 }
 
@@ -81,8 +90,9 @@ function createPlayerTwo() {
 }
 
 function createPlayers(name) {
-  toggleHidden(startGameButton)
+  toggleHidden(player1info, player2info)
   addHidden(playersSubmitButton)
+  removeHidden(startGameButton)
   if (name === playerOneNameField.value) {
     player1 = new Player(name)
   }
@@ -123,6 +133,24 @@ function playerOneDeal() {
   activeCard.src = player1.hand[0].image
   deck.push(player1.hand[0])
   player1.hand.shift()
+  updatePlayer1Hand()
+}
+
+function playerTwoDeal() {
+  activeCard.src = player2.hand[0].image
+  deck.push(player2.hand[0])
+  player2.hand.shift()
+  updatePlayer2Hand()
+}
+
+function updatePlayer1Hand() {
+  var player1hand = document.querySelector('.player1-hand')
+  player1hand.innerText = `${player1.hand.length} in hand`
+}
+
+function updatePlayer2Hand() {
+  var player2hand = document.querySelector('.player2-hand')
+  player2hand.innerText = `${player2.hand.length} in hand`
 }
 
 function playerOneSlap() {
@@ -130,12 +158,7 @@ function playerOneSlap() {
   player1.hand = player1.hand.concat(deck)
   deck = []
   activeCard.src = "./assets/back.png"
-}
-
-function playerTwoDeal() {
-  activeCard.src = player2.hand[0].image
-  deck.push(player2.hand[0])
-  player2.hand.shift()
+  updatePlayer1Hand()
 }
 
 function playerTwoSlap() {
@@ -143,4 +166,5 @@ function playerTwoSlap() {
   player2.hand = player2.hand.concat(deck)
   deck = []
   activeCard.src = "./assets/back.png"
+  updatePlayer2Hand()
 }
