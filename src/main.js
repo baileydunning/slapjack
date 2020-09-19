@@ -134,6 +134,7 @@ function playerOneDeal() {
   deck.push(player1.hand[0])
   player1.hand.shift()
   updatePlayer1Hand()
+  updateDeck()
 }
 
 function playerTwoDeal() {
@@ -141,6 +142,7 @@ function playerTwoDeal() {
   deck.push(player2.hand[0])
   player2.hand.shift()
   updatePlayer2Hand()
+  updateDeck()
 }
 
 function updatePlayer1Hand() {
@@ -153,12 +155,18 @@ function updatePlayer2Hand() {
   player2hand.innerText = `${player2.hand.length} in hand`
 }
 
+function updateDeck() {
+  var cardCount = document.querySelector('.card-count')
+  cardCount.innerText = `${deck.length} in deck`
+}
+
 function playerOneSlap() {
   console.log('SLAP (P1)')
   player1.hand = player1.hand.concat(deck)
   deck = []
   activeCard.src = "./assets/back.png"
   updatePlayer1Hand()
+  updateDeck()
 }
 
 function playerTwoSlap() {
@@ -167,4 +175,5 @@ function playerTwoSlap() {
   deck = []
   activeCard.src = "./assets/back.png"
   updatePlayer2Hand()
+  updateDeck()
 }
