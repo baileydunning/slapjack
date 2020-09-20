@@ -1,5 +1,6 @@
 var player1;
 var player2;
+var newGame;
 
 var formPlayer1 = document.querySelector('.form-player1')
 var formPlayer2 = document.querySelector('.form-player2')
@@ -19,11 +20,11 @@ var footer = document.querySelector('.footer')
 document.addEventListener('keydown', function() {
   if ((player1 instanceof Player) && (player2 instanceof Player)) {
     if (event.code === 'KeyQ') {
-      playerOneDeal()
+      (player1.turn === true) ? playerOneDeal() : console.log('its not your turn')
     } else if (event.code === 'KeyF') {
       playerOneSlap()
     } else if (event.code === 'KeyP') {
-      playerTwoDeal()
+      (player2.turn === true) ? playerTwoDeal() : console.log('its not your turn')
     } else if (event.code === 'KeyJ') {
       playerTwoSlap()
     }
@@ -78,7 +79,6 @@ function createPlayerOne() {
 
 function createPlayerTwo() {
   if (errorHandling() === true) {
-    console.log('ERROR')
     return
   } else {
       var playerTwoTitle = document.querySelector('.player2-title')
@@ -94,10 +94,10 @@ function createPlayers(name) {
   addHidden(playersSubmitButton)
   removeHidden(startGameButton)
   if (name === playerOneNameField.value) {
-    player1 = new Player(name)
+    player1 = new Player(name, true)
   }
   if (name === playerTwoNameField.value) {
-    player2 = new Player(name)
+    player2 = new Player(name, false)
   }
 }
 
@@ -121,28 +121,45 @@ function dealCards() {
 
 function startGame() {
   if ((player1 instanceof Player) && (player2 instanceof Player)) {
+    newGame = new Game
     toggleHidden(gameOn)
     addHidden(gameOff)
     dealCards()
+    displayPlayerTurn()
   } else {
     alert('add players')
   }
 }
 
+function displayPlayerTurn() {
+  var turn = document.querySelector('.player-turn')
+  if (player1.turn === true) {
+    turn.innerText = `It's ${player1.name}'s turn!`
+  } else if (player2.turn === true) {
+    turn.innerText = `It's ${player2.name}'s turn!`
+  }
+}
+
 function playerOneDeal() {
-  activeCard.src = player1.hand[0].image
+  activeCard.src = player1.hand[0].image || './assets/back.png'
   deck.push(player1.hand[0])
   player1.hand.shift()
   updatePlayer1Hand()
   updateDeck()
+  player1.turn = false
+  player2.turn = true
+  displayPlayerTurn()
 }
 
 function playerTwoDeal() {
-  activeCard.src = player2.hand[0].image
+  activeCard.src = player2.hand[0].image || './assets/back.png'
   deck.push(player2.hand[0])
   player2.hand.shift()
   updatePlayer2Hand()
   updateDeck()
+  player2.turn = false
+  player1.turn = true
+  displayPlayerTurn()
 }
 
 function updatePlayer1Hand() {
@@ -161,19 +178,42 @@ function updateDeck() {
 }
 
 function playerOneSlap() {
-  console.log('SLAP (P1)')
-  player1.hand = player1.hand.concat(deck)
-  deck = []
-  activeCard.src = "./assets/back.png"
-  updatePlayer1Hand()
-  updateDeck()
+  if (checkSlapConditions() === true) {
+    console.log('SLAP (P1)')
+    player1.hand = player1.hand.concat(deck)
+    deck = []
+    activeCard.src = "./assets/back.png"
+    updatePlayer1Hand()
+    updateDeck()
+  } else {
+    console.log('p1 can\'t slap')
+  }
 }
 
 function playerTwoSlap() {
-  console.log('SLAP (P2)')
-  player2.hand = player2.hand.concat(deck)
-  deck = []
-  activeCard.src = "./assets/back.png"
-  updatePlayer2Hand()
-  updateDeck()
+  if (checkSlapConditions() === true) {
+    console.log('SLAP (P2)')
+    player2.hand = player2.hand.concat(deck)
+    deck = []
+    activeCard.src = "./assets/back.png"
+    updatePlayer2Hand()
+    updateDeck()
+  } else {
+    console.log('p2 can\'t slap')
+  }
+}
+
+function checkSlapConditions() {
+  if (deck[deck.length - 1].number === 11) {
+    console.log('jack slap')
+    return true
+  } else if (deck[deck.length - 1].number === deck[deck.length - 2].number) {
+    console.log('doubles slap')
+    return true
+  } else if (deck[deck.length - 1].number === deck[deck.length - 3].number) {
+    console.log('sandwich slap')
+    return true
+  } else {
+    return false
+  }
 }

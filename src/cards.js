@@ -154,5 +154,5 @@ var deck = [
   number: 12},
   {image: './assets/red-king.png',
   color: 'red',
-  number: 13},
+  number: 13}
  ]
