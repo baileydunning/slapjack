@@ -176,19 +176,39 @@ function updateDeck() {
 }
 
 function playerOneSlap() {
-  console.log('SLAP (P1)')
-  player1.hand = player1.hand.concat(deck)
-  deck = []
-  activeCard.src = "./assets/back.png"
-  updatePlayer1Hand()
-  updateDeck()
+  if (checkSlapConditions() === true) {
+    console.log('SLAP (P1)')
+    player1.hand = player1.hand.concat(deck)
+    deck = []
+    activeCard.src = "./assets/back.png"
+    updatePlayer1Hand()
+    updateDeck()
+  } else {
+    console.log('p1 can\'t slap')
+  }
 }
 
 function playerTwoSlap() {
-  console.log('SLAP (P2)')
-  player2.hand = player2.hand.concat(deck)
-  deck = []
-  activeCard.src = "./assets/back.png"
-  updatePlayer2Hand()
-  updateDeck()
+  if (checkSlapConditions() === true) {
+    console.log('SLAP (P2)')
+    player2.hand = player2.hand.concat(deck)
+    deck = []
+    activeCard.src = "./assets/back.png"
+    updatePlayer2Hand()
+    updateDeck()
+  } else {
+    console.log('p2 can\'t slap')
+  }
+}
+
+function checkSlapConditions() {
+  if (deck[deck.length - 1].number === 11) {
+    return true
+  } else if (deck[deck.length - 1].number === deck[deck.length - 2].number) {
+    return true
+  } else if (deck[deck.length - 1].number === deck[deck.length - 3].number) {
+    return true
+  } else {
+    return false
+  }
 }
