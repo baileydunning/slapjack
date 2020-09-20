@@ -1,13 +1,13 @@
 class Game {
-  constructor() {
-    this.player1 = new Player(true)
-    this.player2 = new Player(false)
+  constructor(p1Name, p2Name) {
+    this.player1 = new Player(p1Name, true)
+    this.player2 = new Player(p2Name, false)
     this.deck = deck
     this.gameOn = true
   }
 
-  shuffle() {
-    
+  shuffle(cards) {
+
   }
 
   dealCards() {
