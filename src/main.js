@@ -143,7 +143,7 @@ function updateDeck() {
 function playerOneSlap() {
   if (checkSlapConditions() === true) {
     console.log('SLAP (P1)')
-    player1.hand = newGame.player1.hand.concat(deck)
+    newGame.player1.hand = newGame.player1.hand.concat(deck)
     deck = []
     activeCard.src = "./assets/back.png"
     updatePlayer1Hand()
