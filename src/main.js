@@ -1,17 +1,10 @@
 var newGame;
 
-var formPlayer1 = document.querySelector('.form-player1')
-var formPlayer2 = document.querySelector('.form-player2')
-var playerOneNameField = document.querySelector('.player1-name')
-var playerTwoNameField = document.querySelector('.player2-name')
-var player1info = document.querySelector('.player1-info')
-var player2info = document.querySelector('.player2-info')
-var player2hand = document.querySelector('.player2-hand')
-var gameOn = document.querySelector('.game-on')
-var gameOff = document.querySelector('.game-off')
-var startGameButton = document.querySelector('.start-game-button')
-var activeCard = document.querySelector('.card-active')
-var footer = document.querySelector('.footer')
+import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './page-elements.js'
+import Game from './game.js'
+import Player from './player.js'
+import {deck} from './cards.js'
+console.log(newGame)
 
 
 document.addEventListener('keydown', function() {
@@ -27,6 +20,8 @@ document.addEventListener('keydown', function() {
     }
   }
 })
+
+startGameButton.addEventListener('click', startGame)
 
 function addHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -83,6 +78,7 @@ function startGame() {
     var p1Name = playerOneNameField.value
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
+    newGame.dealCards()
     displayPlayerOne()
     displayPlayerTwo()
     toggleHidden(gameOn)

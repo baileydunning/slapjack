@@ -1,4 +1,4 @@
-class Player {
+export default class Player {
   constructor(name, turn) {
     this.id = Date.now()
     this.name = name
@@ -8,7 +8,7 @@ class Player {
   }
 
   playCard() {
-    
+
   }
 
   saveWinsToStorage() {
