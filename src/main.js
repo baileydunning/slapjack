@@ -1,5 +1,6 @@
 var player1;
 var player2;
+var newGame;
 
 var formPlayer1 = document.querySelector('.form-player1')
 var formPlayer2 = document.querySelector('.form-player2')
@@ -120,6 +121,7 @@ function dealCards() {
 
 function startGame() {
   if ((player1 instanceof Player) && (player2 instanceof Player)) {
+    newGame = new Game
     toggleHidden(gameOn)
     addHidden(gameOff)
     dealCards()
@@ -203,10 +205,13 @@ function playerTwoSlap() {
 
 function checkSlapConditions() {
   if (deck[deck.length - 1].number === 11) {
+    console.log('jack slap')
     return true
   } else if (deck[deck.length - 1].number === deck[deck.length - 2].number) {
+    console.log('doubles slap')
     return true
   } else if (deck[deck.length - 1].number === deck[deck.length - 3].number) {
+    console.log('sandwich slap')
     return true
   } else {
     return false

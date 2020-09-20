@@ -7,6 +7,10 @@ class Player {
     this.turn = turn
   }
 
+  playCard() {
+    
+  }
+
   saveWinsToStorage() {
 
   }
