@@ -5,7 +5,6 @@ import {deck} from './cards.js'
 import Game from './game.js'
 import Player from './player.js'
 
-
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
     if (event.code === 'KeyQ') {

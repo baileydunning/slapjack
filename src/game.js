@@ -15,6 +15,7 @@ export default class Game {
     return deck[randomCard];
   }
 
+
   dealCards() {
     for (var i = 0; i < this.deck.length; i++) {
       while (this.deck.length > 0) {
@@ -58,6 +59,7 @@ export default class Game {
   player1Slap() {
     if (this.checkSlapConditions() === true) {
       this.player1.hand = this.player1.hand.concat(this.cardPile)
+      this.player1.shuffleHand(this.player1.hand)
       this.cardPile = []
       return true
     }
@@ -66,6 +68,7 @@ export default class Game {
   player2Slap() {
     if (this.checkSlapConditions() === true) {
       this.player2.hand = this.player2.hand.concat(this.cardPile)
+      this.player2.shuffleHand(this.player2.hand)
       this.cardPile = []
       return true
     }

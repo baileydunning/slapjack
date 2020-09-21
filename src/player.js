@@ -13,6 +13,16 @@ export default class Player {
     this.hand.shift()
   }
 
+  shuffleHand(cards) {
+    var shuffledHand = []
+    for (var i = cards.length; i > 0; i--) {
+      var swapIndex = Math.floor(Math.random() * (i + 1))
+      shuffledHand.push(cards[swapIndex])
+    }
+    this.hand = shuffledHand
+    return this.hand
+  }
+
   saveWinsToStorage() {
 
   }
