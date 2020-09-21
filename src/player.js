@@ -14,6 +14,10 @@ export default class Player {
     this.hand.shift()
   }
 
+  slap() {
+    this.hand = this.hand.concat(deck)
+  }
+
   saveWinsToStorage() {
 
   }

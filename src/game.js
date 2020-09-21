@@ -5,7 +5,7 @@ export default class Game {
   constructor(p1Name, p2Name) {
     this.player1 = new Player(p1Name, true)
     this.player2 = new Player(p2Name, false)
-    this.centerPile = 0
+    this.deck = deck
     this.gameOn = true
   }
 
@@ -31,4 +31,5 @@ export default class Game {
     this.player1.turn = !this.player1.turn
     this.player2.turn = !this.player2.turn
   }
+
 }

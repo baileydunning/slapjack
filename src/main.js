@@ -115,8 +115,7 @@ function updateDeck() {
 function playerOneSlap() {
   if (checkSlapConditions() === true) {
     console.log('SLAP (P1)')
-    newGame.player1.hand = newGame.player1.hand.concat(deck)
-    deck = []
+    newGame.player1.slap()
     activeCard.src = "./assets/back.png"
     updatePlayer1Hand()
     updateDeck()
@@ -128,8 +127,7 @@ function playerOneSlap() {
 function playerTwoSlap() {
   if (checkSlapConditions() === true) {
     console.log('SLAP (P2)')
-    newGame.player2.hand = newGame.player2.hand.concat(deck)
-    deck = []
+    newGame.player2.slap()
     activeCard.src = "./assets/back.png"
     updatePlayer2Hand()
     updateDeck()
