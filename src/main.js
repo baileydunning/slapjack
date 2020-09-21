@@ -3,8 +3,6 @@ var newGame;
 import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './page-elements.js'
 import Game from './game.js'
 import Player from './player.js'
-import {deck} from './cards.js'
-console.log(newGame)
 
 
 document.addEventListener('keydown', function() {
@@ -55,24 +53,6 @@ function displayPlayerTwo() {
   playerTwoTitle.innerText = playerTwoNameField.value
 }
 
-function shuffle(cards) {
-  var randomCard = Math.floor(Math.random() * cards.length);
-  return cards[randomCard];
-}
-
-function dealCards() {
-  for (var i = 0; i < deck.length; i++) {
-    while (deck.length > 0) {
-      var oneCard = shuffle(deck)
-      newGame.player1.hand.push(oneCard)
-      deck.splice(i, 1)
-      var twoCard = shuffle(deck)
-      newGame.player2.hand.push(twoCard)
-      deck.splice(i, 1)
-    }
-  }
-}
-
 function startGame() {
   if (playerOneNameField.value !== '' && playerTwoNameField.value !== '') {
     var p1Name = playerOneNameField.value
@@ -83,7 +63,6 @@ function startGame() {
     displayPlayerTwo()
     toggleHidden(gameOn)
     addHidden(gameOff)
-    dealCards()
     displayPlayerTurn()
   } else {
     alert('add players')
