@@ -13,10 +13,6 @@ export default class Player {
     this.hand.shift()
   }
 
-  slap() {
-    
-  }
-
   saveWinsToStorage() {
 
   }

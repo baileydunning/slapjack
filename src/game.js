@@ -60,8 +60,6 @@ export default class Game {
       this.player1.hand = this.player1.hand.concat(this.cardPile)
       this.cardPile = []
       return true
-    } else {
-      return 'Sucks to suck'
     }
   }
 
@@ -70,8 +68,6 @@ export default class Game {
       this.player2.hand = this.player2.hand.concat(this.cardPile)
       this.cardPile = []
       return true
-    } else {
-      return 'Sucks to suck'
     }
   }
 }
