@@ -38,26 +38,40 @@ export default class Game {
     this.player2.turn = !this.player2.turn
   }
 
-  playerSlap() {
+  checkSlapConditions() {
     if (this.cardPile[this.cardPile.length - 1].number === 11) {
       console.log('JACK')
-      this.player1.hand = this.player1.hand.concat(this.cardPile)
-      this.cardPile = []
       return true
     }
     if (this.cardPile[this.cardPile.length - 1].number === this.cardPile[this.cardPile.length - 2].number) {
       console.log('DOUBLES')
-      this.player1.hand = this.player1.hand.concat(this.cardPile)
-      this.cardPile = []
       return true
     }
     if (this.cardPile[this.cardPile.length - 1].number === this.cardPile[this.cardPile.length - 3].number) {
       console.log('SANDWICH')
+      return true
+    } else {
+      return false
+    }
+  }
+
+  player1Slap() {
+    if (this.checkSlapConditions() === true) {
       this.player1.hand = this.player1.hand.concat(this.cardPile)
       this.cardPile = []
       return true
     } else {
-      return false
+      return 'Sucks to suck'
+    }
+  }
+
+  player2Slap() {
+    if (this.checkSlapConditions() === true) {
+      this.player2.hand = this.player2.hand.concat(this.cardPile)
+      this.cardPile = []
+      return true
+    } else {
+      return 'Sucks to suck'
     }
   }
 }

@@ -14,7 +14,7 @@ export default class Player {
   }
 
   slap() {
-    this.hand = this.hand.concat(newGame.cardPile)
+    
   }
 
   saveWinsToStorage() {

@@ -113,7 +113,7 @@ function updateDeck() {
 }
 
 function playerOneSlap() {
-  if (newGame.playerSlap() === true) {
+  if (newGame.player1Slap() === true) {
     activeCard.src = "./assets/back.png"
     updateDeck()
     updatePlayer1Hand()
@@ -123,7 +123,7 @@ function playerOneSlap() {
 }
 
 function playerTwoSlap() {
-  if (newGame.playerSlap() === true) {
+  if (newGame.player2Slap() === true) {
     activeCard.src = "./assets/back.png"
     updateDeck()
     updatePlayer2Hand()
