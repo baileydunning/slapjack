@@ -1,6 +1,7 @@
 var newGame;
 
 import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './page-elements.js'
+import {deck} from './cards.js'
 import Game from './game.js'
 import Player from './player.js'
 
@@ -8,11 +9,11 @@ import Player from './player.js'
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
     if (event.code === 'KeyQ') {
-      (newGame.player1.turn === true) ? playerOneDeal() : console.log('its not your turn')
+      (newGame.player1.turn === true) ? playerOneDeal() : console.log('its not p1\'s turn')
     } else if (event.code === 'KeyF') {
       playerOneSlap()
     } else if (event.code === 'KeyP') {
-      (newGame.player2.turn === true) ? playerTwoDeal() : console.log('its not your turn')
+      (newGame.player2.turn === true) ? playerTwoDeal() : console.log('its not p2\'s turn')
     } else if (event.code === 'KeyJ') {
       playerTwoSlap()
     }
@@ -80,23 +81,19 @@ function displayPlayerTurn() {
 
 function playerOneDeal() {
   activeCard.src = newGame.player1.hand[0].image || './assets/back.png'
-  deck.push(newGame.player1.hand[0])
-  newGame.player1.hand.shift()
+  newGame.player1.playCard()
+  newGame.playerDeal()
   updatePlayer1Hand()
   updateDeck()
-  newGame.player1.turn = false
-  newGame.player2.turn = true
   displayPlayerTurn()
 }
 
 function playerTwoDeal() {
   activeCard.src = newGame.player2.hand[0].image || './assets/back.png'
-  deck.push(newGame.player2.hand[0])
-  newGame.player2.hand.shift()
+  newGame.player2.playCard()
+  newGame.playerDeal()
   updatePlayer2Hand()
   updateDeck()
-  newGame.player2.turn = false
-  newGame.player1.turn = true
   displayPlayerTurn()
 }
 

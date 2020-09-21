@@ -26,4 +26,9 @@ export default class Game {
       }
     }
   }
+
+  playerDeal() {
+    this.player1.turn = !this.player1.turn
+    this.player2.turn = !this.player2.turn
+  }
 }
