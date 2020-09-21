@@ -10,12 +10,11 @@ export default class Player {
   }
 
   playCard() {
-    deck.push(this.hand[0])
     this.hand.shift()
   }
 
   slap() {
-    this.hand = this.hand.concat(deck)
+    this.hand = this.hand.concat(newGame.cardPile)
   }
 
   saveWinsToStorage() {

@@ -6,6 +6,7 @@ export default class Game {
     this.player1 = new Player(p1Name, true)
     this.player2 = new Player(p2Name, false)
     this.deck = deck
+    this.cardPile = []
     this.gameOn = true
   }
 
@@ -15,21 +16,48 @@ export default class Game {
   }
 
   dealCards() {
-    for (var i = 0; i < deck.length; i++) {
-      while (deck.length > 0) {
-        var oneCard = this.shuffle(deck)
+    for (var i = 0; i < this.deck.length; i++) {
+      while (this.deck.length > 0) {
+        var oneCard = this.shuffle(this.deck)
         this.player1.hand.push(oneCard)
-        deck.splice(i, 1)
-        var twoCard = this.shuffle(deck)
+        this.deck.splice(i, 1)
+        var twoCard = this.shuffle(this.deck)
         this.player2.hand.push(twoCard)
-        deck.splice(i, 1)
+        this.deck.splice(i, 1)
       }
     }
   }
 
   playerDeal() {
+    if (this.player1.turn === true) {
+      this.cardPile.push(this.player1.hand[0])
+    } else if (this.player2.turn === true) {
+      this.cardPile.push(this.player2.hand[0])
+    }
     this.player1.turn = !this.player1.turn
     this.player2.turn = !this.player2.turn
   }
 
+  playerSlap() {
+    if (this.cardPile[this.cardPile.length - 1].number === 11) {
+      console.log('JACK')
+      this.player1.hand = this.player1.hand.concat(this.cardPile)
+      this.cardPile = []
+      return true
+    }
+    if (this.cardPile[this.cardPile.length - 1].number === this.cardPile[this.cardPile.length - 2].number) {
+      console.log('DOUBLES')
+      this.player1.hand = this.player1.hand.concat(this.cardPile)
+      this.cardPile = []
+      return true
+    }
+    if (this.cardPile[this.cardPile.length - 1].number === this.cardPile[this.cardPile.length - 3].number) {
+      console.log('SANDWICH')
+      this.player1.hand = this.player1.hand.concat(this.cardPile)
+      this.cardPile = []
+      return true
+    } else {
+      return false
+    }
+  }
 }

@@ -1,6 +1,6 @@
 var newGame;
 
-import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './page-elements.js'
+import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './elements.js'
 import {deck} from './cards.js'
 import Game from './game.js'
 import Player from './player.js'
@@ -80,18 +80,18 @@ function displayPlayerTurn() {
 }
 
 function playerOneDeal() {
-  activeCard.src = newGame.player1.hand[0].image || './assets/back.png'
   newGame.player1.playCard()
   newGame.playerDeal()
+  activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image || './assets/back.png'
   updatePlayer1Hand()
   updateDeck()
   displayPlayerTurn()
 }
 
 function playerTwoDeal() {
-  activeCard.src = newGame.player2.hand[0].image || './assets/back.png'
   newGame.player2.playCard()
   newGame.playerDeal()
+  activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image || './assets/back.png'
   updatePlayer2Hand()
   updateDeck()
   displayPlayerTurn()
@@ -109,44 +109,25 @@ function updatePlayer2Hand() {
 
 function updateDeck() {
   var cardCount = document.querySelector('.card-count')
-  cardCount.innerText = `${deck.length} in deck`
+  cardCount.innerText = `${newGame.cardPile.length} in deck`
 }
 
 function playerOneSlap() {
-  if (checkSlapConditions() === true) {
-    console.log('SLAP (P1)')
-    newGame.player1.slap()
+  if (newGame.playerSlap() === true) {
     activeCard.src = "./assets/back.png"
-    updatePlayer1Hand()
     updateDeck()
+    updatePlayer1Hand()
   } else {
     console.log('p1 can\'t slap')
   }
 }
 
 function playerTwoSlap() {
-  if (checkSlapConditions() === true) {
-    console.log('SLAP (P2)')
-    newGame.player2.slap()
+  if (newGame.playerSlap() === true) {
     activeCard.src = "./assets/back.png"
-    updatePlayer2Hand()
     updateDeck()
+    updatePlayer2Hand()
   } else {
     console.log('p2 can\'t slap')
-  }
-}
-
-function checkSlapConditions() {
-  if (deck[deck.length - 1].number === 11) {
-    console.log('jack slap')
-    return true
-  } else if (deck[deck.length - 1].number === deck[deck.length - 2].number) {
-    console.log('doubles slap')
-    return true
-  } else if (deck[deck.length - 1].number === deck[deck.length - 3].number) {
-    console.log('sandwich slap')
-    return true
-  } else {
-    return false
   }
 }
