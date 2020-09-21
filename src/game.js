@@ -1,7 +1,4 @@
-import Player from './player.js'
-import {deck} from './cards.js'
-
-export default class Game {
+class Game {
   constructor(p1Name, p2Name) {
     this.player1 = new Player(p1Name, true)
     this.player2 = new Player(p2Name, false)
@@ -10,20 +7,31 @@ export default class Game {
     this.gameOn = true
   }
 
-  shuffle(deck) {
-    var randomCard = Math.floor(Math.random() * deck.length);
-    return deck[randomCard];
+  shuffleDeck(cards) {
+    var currentIndex
+    var swapIndex
+    for (var i = cards.length - 1; i > 0; i--) {
+      swapIndex = Math.floor(Math.random() * (i+1))
+      currentIndex = cards[i]
+      cards[i] = cards[swapIndex]
+      cards[swapIndex] = currentIndex
+    }
+      if (this.deck.length === 52) {
+        this.deck = cards;
+    } else {
+      return cards;
+   }
   }
 
-
   dealCards() {
+    this.shuffleDeck(this.deck)
     for (var i = 0; i < this.deck.length; i++) {
-      while (this.deck.length > 0) {
-        var oneCard = this.shuffle(this.deck)
-        this.player1.hand.push(oneCard)
+      for (var i = 0; i < 26; i++) {
+        this.player1.hand.push(this.deck[i])
         this.deck.splice(i, 1)
-        var twoCard = this.shuffle(this.deck)
-        this.player2.hand.push(twoCard)
+      }
+      for (var i = 0; i < 26; i++) {
+        this.player2.hand.push(this.deck[i])
         this.deck.splice(i, 1)
       }
     }

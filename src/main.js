@@ -1,9 +1,15 @@
 var newGame;
-
-import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './elements.js'
-import {deck} from './cards.js'
-import Game from './game.js'
-import Player from './player.js'
+var formPlayer1 = document.querySelector('.form-player1')
+var formPlayer2 = document.querySelector('.form-player2')
+var playerOneNameField = document.querySelector('.player1-name')
+var playerTwoNameField = document.querySelector('.player2-name')
+var player1info = document.querySelector('.player1-info')
+var player2info = document.querySelector('.player2-info')
+var player2hand = document.querySelector('.player2-hand')
+var gameOn = document.querySelector('.game-on')
+var gameOff = document.querySelector('.game-off')
+var startGameButton = document.querySelector('.start-game-button')
+var activeCard = document.querySelector('.card-active')
 
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
@@ -19,7 +25,9 @@ document.addEventListener('keydown', function() {
   }
 })
 
-startGameButton.addEventListener('click', startGame)
+startGameButton.addEventListener('click', function() {
+  startGame()
+})
 
 function addHidden() {
   for (var i = 0; i < arguments.length; i++) {
