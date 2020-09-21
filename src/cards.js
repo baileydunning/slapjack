@@ -1,4 +1,4 @@
-var deck = [
+export var deck = [
   {image: './assets/blue-01.png',
   color: 'blue',
   number: 1},

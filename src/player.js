@@ -1,4 +1,6 @@
-class Player {
+import {deck} from './cards.js'
+
+export default class Player {
   constructor(name, turn) {
     this.id = Date.now()
     this.name = name
@@ -8,7 +10,7 @@ class Player {
   }
 
   playCard() {
-    
+    this.hand.shift()
   }
 
   saveWinsToStorage() {
