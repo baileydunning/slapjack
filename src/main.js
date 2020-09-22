@@ -84,21 +84,13 @@ function startGame() {
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
     newGame.dealCards()
-    updatePlayer()
+    displayPlayerOne()
+    displayPlayerTwo()
     toggleHidden(gameOn)
     addHidden(gameOff)
   } else {
     alert('add players')
   }
-}
-
-function updatePlayer() {
-  updatePlayer1Hand()
-  updatePlayer2Hand()
-  displayPlayerOne()
-  displayPlayerTwo()
-  displayPlayerTurn()
-  updateDeck()
 }
 
 function displayPlayerTurn() {
@@ -134,9 +126,6 @@ function checkLightningRound() {
 function playerOneDeal() {
   newGame.player1.playCard()
   newGame.playerDeal()
-  // updatePlayer1Hand()
-  // updateDeck()
-  // displayPlayerTurn()
   if (newGame.player1.hand.length !== 0) {
     activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
   }
@@ -146,9 +135,6 @@ function playerOneDeal() {
 function playerTwoDeal() {
   newGame.player2.playCard()
   newGame.playerDeal()
-  // updatePlayer2Hand()
-  // updateDeck()
-  // displayPlayerTurn()
   if (newGame.player2.hand.length !== 0) {
     activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
   }
@@ -161,9 +147,6 @@ function playerOneSlap() {
   } else {
     console.log('p1 can\'t slap')
   }
-  // updateDeck()
-  // updatePlayer1Hand()
-  // updatePlayer2Hand()
   checkLightningRound()
 }
 
@@ -173,8 +156,5 @@ function playerTwoSlap() {
   } else {
     console.log('p2 can\'t slap')
   }
-  // updateDeck()
-  // updatePlayer1Hand()
-  // updatePlayer2Hand()
   checkLightningRound()
 }
