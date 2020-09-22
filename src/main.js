@@ -66,14 +66,14 @@ function toggleHidden() {
 
 function displayPlayerOne() {
   var playerOneTitle = document.querySelector('.player1-title')
-  toggleHidden(player1info)
+  removeHidden(player1info)
   addHidden(formPlayer1)
   playerOneTitle.innerText = playerOneNameField.value
 }
 
 function displayPlayerTwo() {
   var playerTwoTitle = document.querySelector('.player2-title')
-  toggleHidden(player2info)
+  removeHidden(player2info)
   addHidden(formPlayer2)
   playerTwoTitle.innerText = playerTwoNameField.value
 }
@@ -84,6 +84,10 @@ function startGame() {
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
     newGame.dealCards()
+    updatePlayer1Hand()
+    updatePlayer2Hand()
+    displayPlayerTurn()
+    updateDeck()
     displayPlayerOne()
     displayPlayerTwo()
     toggleHidden(gameOn)
@@ -157,4 +161,10 @@ function playerTwoSlap() {
     console.log('p2 can\'t slap')
   }
   checkLightningRound()
+}
+
+function turnGameOff() {
+  var p1WinCount = document.querySelector('.p1-wins')
+  var p2WinCount = document.querySelector('.p2-wins')
+  toggleHidden(gameOn, gameOff)
 }

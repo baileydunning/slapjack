@@ -4,7 +4,6 @@ class Game {
     this.player2 = new Player(p2Name, false)
     this.deck = deck
     this.cardPile = []
-    this.gameCount = 0
     this.lightningRoundActivated = false
   }
 
@@ -17,22 +16,23 @@ class Game {
       cards[i] = cards[swapIndex]
       cards[swapIndex] = currentIndex
     }
-      if (this.deck.length === 52) {
-        this.deck = cards;
+      if (this.cardPile.length === 52) {
+        this.cardPile = cards;
     } else {
       return cards;
    }
   }
 
   dealCards() {
-    this.shuffle(this.deck)
-    for (var i = 0; i < this.deck.length; i++) {
-      while (this.deck.length > 0) {
-        if (this.deck[i] !== undefined) {
-          this.player1.hand.push(this.deck[i])
-          this.deck.splice(i, 1)
-          this.player2.hand.push(this.deck[i])
-          this.deck.splice(i, 1)
+    this.cardPile = this.cardPile.concat(this.deck)
+    this.shuffle(this.cardPile)
+    for (var i = 0; i < this.cardPile.length; i++) {
+      while (this.cardPile.length > 0) {
+        if (this.cardPile[i] !== undefined) {
+          this.player1.hand.push(this.cardPile[i])
+          this.cardPile.splice(i, 1)
+          this.player2.hand.push(this.cardPile[i])
+          this.cardPile.splice(i, 1)
         }
       }
     }
@@ -170,18 +170,17 @@ class Game {
     if (this.player1.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P2 WINS')
       this.player2.wins += 1
-      this.gameCount++
       this.startNewGame()
     } else if (this.player2.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P1 WINS')
       this.player1.wins += 1
-      this.gameCount++
       this.startNewGame()
     }
   }
 
   startNewGame() {
-    console.log('time to start a new game')
-    this.deck = this.player1.hand.concat(this.player2.hand)
+    this.player1.hand = []
+    this.player2.hand = []
+    turnGameOff()
   }
 }
