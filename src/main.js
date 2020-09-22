@@ -86,6 +86,25 @@ function displayPlayerTurn() {
   }
 }
 
+function updatePlayer1Hand() {
+  var player1hand = document.querySelector('.player1-hand')
+  player1hand.innerText = `${newGame.player1.hand.length} in hand`
+}
+
+function updatePlayer2Hand() {
+  var player2hand = document.querySelector('.player2-hand')
+  player2hand.innerText = `${newGame.player2.hand.length} in hand`
+}
+
+function updateDeck() {
+  var cardCount = document.querySelector('.card-count')
+  cardCount.innerText = `${newGame.cardPile.length} in deck`
+}
+
+function updateFooterMessage() {
+  var footerText = document.querySelector('.footer-text')
+}
+
 function playerOneDeal() {
   newGame.player1.playCard()
   newGame.playerDeal()
@@ -102,21 +121,6 @@ function playerTwoDeal() {
   updatePlayer2Hand()
   updateDeck()
   displayPlayerTurn()
-}
-
-function updatePlayer1Hand() {
-  var player1hand = document.querySelector('.player1-hand')
-  player1hand.innerText = `${newGame.player1.hand.length} in hand`
-}
-
-function updatePlayer2Hand() {
-  var player2hand = document.querySelector('.player2-hand')
-  player2hand.innerText = `${newGame.player2.hand.length} in hand`
-}
-
-function updateDeck() {
-  var cardCount = document.querySelector('.card-count')
-  cardCount.innerText = `${newGame.cardPile.length} in deck`
 }
 
 function playerOneSlap() {
