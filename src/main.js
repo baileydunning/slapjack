@@ -116,25 +116,25 @@ function checkLightningRound() {
 function playerOneDeal() {
   newGame.player1.playCard()
   newGame.playerDeal()
-  checkLightningRound()
   updatePlayer1Hand()
   updateDeck()
   displayPlayerTurn()
   if (newGame.player1.hand.length !== 0) {
     activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
   }
+  checkLightningRound()
 }
 
 function playerTwoDeal() {
   newGame.player2.playCard()
   newGame.playerDeal()
-  checkLightningRound()
   updatePlayer2Hand()
   updateDeck()
   displayPlayerTurn()
   if (newGame.player2.hand.length !== 0) {
     activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
   }
+  checkLightningRound()
 }
 
 function playerOneSlap() {

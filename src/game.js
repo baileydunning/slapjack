@@ -27,18 +27,20 @@ class Game {
     this.shuffle(this.deck)
     for (var i = 0; i < this.deck.length; i++) {
       while (this.deck.length > 0) {
-        this.player1.hand.push(this.deck[i])
-        this.deck.splice(i, 1)
-        this.player2.hand.push(this.deck[i])
-        this.deck.splice(i, 1)
+        if (this.deck[i] !== undefined) {
+          this.player1.hand.push(this.deck[i])
+          this.deck.splice(i, 1)
+          this.player2.hand.push(this.deck[i])
+          this.deck.splice(i, 1)
+        }
       }
     }
   }
 
   playerDeal() {
-    if (this.player1.turn === true) {
+    if (this.player1.turn === true && this.player1.hand[0] !== undefined) {
       this.cardPile.push(this.player1.hand[0])
-    } else if (this.player2.turn === true) {
+    } else if (this.player2.turn === true && this.player2.hand[0] !== undefined) {
       this.cardPile.push(this.player2.hand[0])
     }
     this.player1.turn = !this.player1.turn
@@ -90,11 +92,9 @@ class Game {
 
   triggerLightningRound() {
     if (this.player1.hand.length === 0) {
-      console.log('p1 has 0 cards')
       this.player2.turn = true
       return true
     } else if (this.player2.hand.length === 0) {
-      console.log('p2 has 0 cards')
       this.player1.turn = true
       return true
     } else {
@@ -103,6 +103,10 @@ class Game {
   }
 
   lightningRound() {
-    console.log('LIGHTNING ROUND')
+    if (this.cardPile[this.cardPile.length - 1].number === 11) {
+      console.log('THIS CARD HAS TO BE SLAPPED')
+    } else {
+      console.log('keep dealing')
+    }
   }
 }
