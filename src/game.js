@@ -87,4 +87,22 @@ class Game {
       this.player1.hand.push(badSlap)
     }
   }
+
+  triggerLightningRound() {
+    if (this.player1.hand.length === 0) {
+      console.log('p1 has 0 cards')
+      this.player2.turn = true
+      return true
+    } else if (this.player2.hand.length === 0) {
+      console.log('p2 has 0 cards')
+      this.player1.turn = true
+      return true
+    } else {
+      return false
+    }
+  }
+
+  lightningRound() {
+    console.log('LIGHTNING ROUND')
+  }
 }

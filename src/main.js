@@ -67,14 +67,20 @@ function startGame() {
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
     newGame.dealCards()
-    displayPlayerOne()
-    displayPlayerTwo()
+    updatePlayer()
     toggleHidden(gameOn)
     addHidden(gameOff)
     displayPlayerTurn()
   } else {
     alert('add players')
   }
+}
+
+function updatePlayer() {
+  updatePlayer1Hand()
+  updatePlayer2Hand()
+  displayPlayerOne()
+  displayPlayerTwo()
 }
 
 function displayPlayerTurn() {
@@ -101,26 +107,34 @@ function updateDeck() {
   cardCount.innerText = `${newGame.cardPile.length} in deck`
 }
 
-function updateFooterMessage() {
-  var footerText = document.querySelector('.footer-text')
+function checkLightningRound() {
+  if (newGame.triggerLightningRound() === true) {
+    newGame.lightningRound()
+  }
 }
 
 function playerOneDeal() {
   newGame.player1.playCard()
   newGame.playerDeal()
-  activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image || './assets/back.png'
+  checkLightningRound()
   updatePlayer1Hand()
   updateDeck()
   displayPlayerTurn()
+  if (newGame.player1.hand.length !== 0) {
+    activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
+  }
 }
 
 function playerTwoDeal() {
   newGame.player2.playCard()
   newGame.playerDeal()
-  activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image || './assets/back.png'
+  checkLightningRound()
   updatePlayer2Hand()
   updateDeck()
   displayPlayerTurn()
+  if (newGame.player2.hand.length !== 0) {
+    activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
+  }
 }
 
 function playerOneSlap() {
