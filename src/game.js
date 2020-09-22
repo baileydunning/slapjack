@@ -91,6 +91,9 @@ class Game {
       console.log('BAD SLAP')
       var badSlap = this.player1.hand.shift()
       this.player2.hand.push(badSlap)
+      if (this.lightningRoundActivated === true) {
+        this.winGame()
+      }
     }
   }
 
@@ -106,6 +109,9 @@ class Game {
       console.log('BAD SLAP')
       var badSlap = this.player2.hand.shift()
       this.player1.hand.push(badSlap)
+      if (this.lightningRoundActivated === true) {
+        this.winGame()
+      }
     }
   }
 
@@ -144,7 +150,7 @@ class Game {
 
   lightningRound() {
     if (this.lightningRoundActivated === true) {
-      if (this.checkEmptyHands() === false) { this.lightningRoundActivated = false }
+      if (this.checkEmptyHands() === true) { return }
       if (this.cardPile[this.cardPile.length - 1].number === 11) {
        var win = setInterval(function() {
          if (newGame.cardPile.length === 0) {
@@ -161,12 +167,12 @@ class Game {
   }
 
   winGame() {
-    if (this.player1.hand.length === 0 && this.triggerLightningRound() === true) {
+    if (this.player1.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P2 WINS')
       this.player2.wins += 1
       this.gameCount++
       this.startNewGame()
-    } else if (this.player2.hand.length === 0 && this.triggerLightningRound() === true) {
+    } else if (this.player2.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P1 WINS')
       this.player1.wins += 1
       this.gameCount++
