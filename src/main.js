@@ -166,5 +166,7 @@ function playerTwoSlap() {
 function turnGameOff() {
   var p1WinCount = document.querySelector('.p1-wins')
   var p2WinCount = document.querySelector('.p2-wins')
+  p1WinCount.innerText = `${newGame.player1.wins} Wins`
+  p2WinCount.innerText = `${newGame.player2.wins} Wins`
   toggleHidden(gameOn, gameOff)
 }
