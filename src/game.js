@@ -43,8 +43,10 @@ class Game {
     } else if (this.player2.turn === true && this.player2.hand[0] !== undefined) {
       this.cardPile.push(this.player2.hand[0])
     }
-    this.player1.turn = !this.player1.turn
-    this.player2.turn = !this.player2.turn
+    if (this.triggerLightningRound() === false) {
+      this.player1.turn = !this.player1.turn
+      this.player2.turn = !this.player2.turn
+    }
   }
 
   disablePlayerDeal() {
@@ -113,8 +115,27 @@ class Game {
     }
   }
 
+  checkEmptyHands() {
+    if ((this.player1.hand.length === 0) && (this.player2.hand.length === 0)) {
+        if (this.player2.hand.length === 0) {
+          this.player1.hand = this.player1.hand.concat(this.cardPile)
+          this.cardPile = []
+          this.shuffle(this.player1.hand)
+          return true
+      } else if (this.player1.hand.length === 0) {
+          this.player2.hand = this.player2.hand.concat(this.cardPile)
+          this.cardPile = []
+          this.shuffle(this.player2.hand)
+          return true
+      } else {
+          return false
+      }
+    }
+  }
+
   lightningRound() {
-    if (this.cardPile[this.cardPile.length - 1].number === 11) {
+     if (this.checkEmptyHands() === true) { return }
+     if (this.cardPile[this.cardPile.length - 1].number === 11) {
       var win = setInterval(function() {
         if (newGame.cardPile.length === 0) {
           clearInterval(win)
@@ -130,6 +151,7 @@ class Game {
 
   winGame() {
     this.gameCount++
+    this.startNewGame()
     if (this.player1.hand.length === 0) {
       console.log('P2 WINS')
       this.player2.wins += 1
@@ -137,5 +159,12 @@ class Game {
       console.log('P1 WINS')
       this.player1.wins += 1
     }
+  }
+
+  startNewGame() {
+    console.log('time to start a new game')
+    this.deck = this.player1.hand.concat(this.player2.hand)
+    this.player1.hand = []
+    this.player2.hand = []
   }
 }
