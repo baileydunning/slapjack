@@ -150,8 +150,8 @@ class Game {
 
   lightningRound() {
     if (this.lightningRoundActivated === true) {
-      if (this.checkEmptyHands() === true) { return }
-      if (this.cardPile[this.cardPile.length - 1].number === 11) {
+      this.checkEmptyHands()
+      if ((this.cardPile.length !== 0) && (this.cardPile[this.cardPile.length - 1].number === 11)) {
        var win = setInterval(function() {
          if (newGame.cardPile.length === 0) {
            clearInterval(win)
