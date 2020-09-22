@@ -122,19 +122,21 @@ function updateDeck() {
 function playerOneSlap() {
   if (newGame.player1Slap() === true) {
     activeCard.src = "./assets/back.png"
-    updateDeck()
-    updatePlayer1Hand()
   } else {
     console.log('p1 can\'t slap')
   }
+  updateDeck()
+  updatePlayer1Hand()
+  updatePlayer2Hand()
 }
 
 function playerTwoSlap() {
   if (newGame.player2Slap() === true) {
     activeCard.src = "./assets/back.png"
-    updateDeck()
-    updatePlayer2Hand()
   } else {
     console.log('p2 can\'t slap')
   }
+  updateDeck()
+  updatePlayer1Hand()
+  updatePlayer2Hand()
 }

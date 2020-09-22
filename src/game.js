@@ -11,7 +11,7 @@ class Game {
     var currentIndex
     var swapIndex
     for (var i = cards.length - 1; i > 0; i--) {
-      swapIndex = Math.floor(Math.random() * (i+1))
+      swapIndex = Math.floor(Math.random() * (i + 1))
       currentIndex = cards[i]
       cards[i] = cards[swapIndex]
       cards[swapIndex] = currentIndex
@@ -68,6 +68,10 @@ class Game {
       this.shuffle(this.player1.hand)
       this.cardPile = []
       return true
+    } else {
+      console.log('BAD SLAP')
+      var badSlap = this.player1.hand.shift()
+      this.player2.hand.push(badSlap)
     }
   }
 
@@ -77,6 +81,10 @@ class Game {
       this.shuffle(this.player2.hand)
       this.cardPile = []
       return true
+    } else {
+      console.log('BAD SLAP')
+      var badSlap = this.player2.hand.shift()
+      this.player1.hand.push(badSlap)
     }
   }
 }
