@@ -11,15 +11,15 @@ class Player {
     this.hand.shift()
   }
 
-  shuffleHand(cards) {
-    var shuffledHand = []
-    for (var i = cards.length; i > 0; i--) {
-      var randomIndex = Math.floor(Math.random() * (i + 1))
-      shuffledHand.push(cards[randomIndex])
-    }
-    this.hand = shuffledHand
-    return this.hand
-  }
+  // shuffleHand(cards) {
+  //   var shuffledHand = []
+  //   for (var i = cards.length; i > 0; i--) {
+  //     var randomIndex = Math.floor(Math.random() * (i + 1))
+  //     shuffledHand.push(cards[randomIndex])
+  //   }
+  //   this.hand = shuffledHand
+  //   return this.hand
+  // }
 
   saveWinsToStorage() {
 

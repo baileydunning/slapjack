@@ -7,7 +7,7 @@ class Game {
     this.gameOn = true
   }
 
-  shuffleDeck(cards) {
+  shuffle(cards) {
     var currentIndex
     var swapIndex
     for (var i = cards.length - 1; i > 0; i--) {
@@ -24,13 +24,11 @@ class Game {
   }
 
   dealCards() {
-    this.shuffleDeck(this.deck)
+    this.shuffle(this.deck)
     for (var i = 0; i < this.deck.length; i++) {
-      for (var i = 0; i < 26; i++) {
+      while (this.deck.length > 0) {
         this.player1.hand.push(this.deck[i])
         this.deck.splice(i, 1)
-      }
-      for (var i = 0; i < 26; i++) {
         this.player2.hand.push(this.deck[i])
         this.deck.splice(i, 1)
       }
@@ -67,7 +65,7 @@ class Game {
   player1Slap() {
     if (this.checkSlapConditions() === true) {
       this.player1.hand = this.player1.hand.concat(this.cardPile)
-      this.player1.shuffleHand(this.player1.hand)
+      this.shuffle(this.player1.hand)
       this.cardPile = []
       return true
     }
@@ -76,7 +74,7 @@ class Game {
   player2Slap() {
     if (this.checkSlapConditions() === true) {
       this.player2.hand = this.player2.hand.concat(this.cardPile)
-      this.player2.shuffleHand(this.player2.hand)
+      this.shuffle(this.player2.hand)
       this.cardPile = []
       return true
     }
