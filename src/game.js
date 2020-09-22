@@ -4,7 +4,7 @@ class Game {
     this.player2 = new Player(p2Name, false)
     this.deck = deck
     this.cardPile = []
-    this.gameOn = true
+    this.gameCount = 0
   }
 
   shuffle(cards) {
@@ -115,17 +115,21 @@ class Game {
 
   lightningRound() {
     if (this.cardPile[this.cardPile.length - 1].number === 11) {
-      console.log('THIS CARD HAS TO BE SLAPPED')
-      setTimeout(function() {
-        if(newGame.triggerLightningRound() === true) {
-          return newGame.winGame() }
-        }, 2000)
+      var win = setInterval(function() {
+        if (newGame.cardPile.length === 0) {
+          clearInterval(win)
+          newGame.winGame()
+        } else {
+          console.log('someone has to slap')
+        }
+      }, 1000)
     } else {
       console.log('lightning round! keep dealing')
     }
   }
 
   winGame() {
+    this.gameCount++
     if (this.player1.hand.length === 0) {
       console.log('P2 WINS')
       this.player2.wins += 1
