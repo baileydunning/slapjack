@@ -40,20 +40,6 @@ button {
   margin: 10px;
 }
 
-.footer {
-  background-color: #323231;
-  width: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  height: 80px;
-  border-top: 5px solid #686866;
-  align-content: flex-end;
-  align-items: center;
-  bottom: 0;
-}
-
 .hidden {
   display: none !important;
 }
@@ -91,4 +77,13 @@ button {
 .card-active {
   width: 220px;
   height: 350px;
+}
+
+.game-off {
+  justify-content: space-between;
+}
+
+.extra-padding {
+  padding-left: 20px;
+  padding-right: 20px;
 }

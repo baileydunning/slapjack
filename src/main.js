@@ -1,26 +1,50 @@
 var newGame;
-
-import {formPlayer1, formPlayer2, playerOneNameField, playerTwoNameField, player1info, player2info, player2hand, gameOn, gameOff, startGameButton, activeCard} from './elements.js'
-import {deck} from './cards.js'
-import Game from './game.js'
-import Player from './player.js'
-
+var formPlayer1 = document.querySelector('.form-player1')
+var formPlayer2 = document.querySelector('.form-player2')
+var playerOneNameField = document.querySelector('.player1-name')
+var playerTwoNameField = document.querySelector('.player2-name')
+var player1info = document.querySelector('.player1-info')
+var player2info = document.querySelector('.player2-info')
+var player2hand = document.querySelector('.player2-hand')
+var gameOn = document.querySelector('.game-on')
+var gameOff = document.querySelector('.game-off')
+var startGameButton = document.querySelector('.start-game-button')
+var activeCard = document.querySelector('.card-active')
 
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
     if (event.code === 'KeyQ') {
-      (newGame.player1.turn === true) ? playerOneDeal() : console.log('its not p1\'s turn')
+      if ((newGame.player1.turn === true) && (newGame.disablePlayerDeal() === false)) {
+        playerOneDeal()
+      } else {
+        console.log('its not p1\'s turn')
+      }
     } else if (event.code === 'KeyF') {
       playerOneSlap()
     } else if (event.code === 'KeyP') {
-      (newGame.player2.turn === true) ? playerTwoDeal() : console.log('its not p2\'s turn')
+      if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
+        playerTwoDeal()
+      } else {
+        console.log('its not p2\'s turn')
+      }
     } else if (event.code === 'KeyJ') {
       playerTwoSlap()
     }
   }
 })
 
-startGameButton.addEventListener('click', startGame)
+document.addEventListener('keyup', function() {
+  if (newGame instanceof Game) {
+    updatePlayer1Hand()
+    updatePlayer2Hand()
+    displayPlayerTurn()
+    updateDeck()
+  }
+})
+
+startGameButton.addEventListener('click', function() {
+  startGame()
+})
 
 function addHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -42,14 +66,14 @@ function toggleHidden() {
 
 function displayPlayerOne() {
   var playerOneTitle = document.querySelector('.player1-title')
-  toggleHidden(player1info)
+  removeHidden(player1info)
   addHidden(formPlayer1)
   playerOneTitle.innerText = playerOneNameField.value
 }
 
 function displayPlayerTwo() {
   var playerTwoTitle = document.querySelector('.player2-title')
-  toggleHidden(player2info)
+  removeHidden(player2info)
   addHidden(formPlayer2)
   playerTwoTitle.innerText = playerTwoNameField.value
 }
@@ -60,11 +84,14 @@ function startGame() {
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
     newGame.dealCards()
+    updatePlayer1Hand()
+    updatePlayer2Hand()
+    displayPlayerTurn()
+    updateDeck()
     displayPlayerOne()
     displayPlayerTwo()
     toggleHidden(gameOn)
     addHidden(gameOff)
-    displayPlayerTurn()
   } else {
     alert('add players')
   }
@@ -77,24 +104,6 @@ function displayPlayerTurn() {
   } else if (newGame.player2.turn === true) {
     turn.innerText = `It's ${newGame.player2.name}'s turn!`
   }
-}
-
-function playerOneDeal() {
-  newGame.player1.playCard()
-  newGame.playerDeal()
-  activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image || './assets/back.png'
-  updatePlayer1Hand()
-  updateDeck()
-  displayPlayerTurn()
-}
-
-function playerTwoDeal() {
-  newGame.player2.playCard()
-  newGame.playerDeal()
-  activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image || './assets/back.png'
-  updatePlayer2Hand()
-  updateDeck()
-  displayPlayerTurn()
 }
 
 function updatePlayer1Hand() {
@@ -112,22 +121,52 @@ function updateDeck() {
   cardCount.innerText = `${newGame.cardPile.length} in deck`
 }
 
+function checkLightningRound() {
+  if (newGame.triggerLightningRound() === true) {
+    newGame.lightningRound()
+  }
+}
+
+function playerOneDeal() {
+  newGame.player1.playCard()
+  newGame.playerDeal()
+  if (newGame.player1.hand.length !== 0) {
+    activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
+  }
+  checkLightningRound()
+}
+
+function playerTwoDeal() {
+  newGame.player2.playCard()
+  newGame.playerDeal()
+  if (newGame.player2.hand.length !== 0) {
+    activeCard.src = newGame.cardPile[newGame.cardPile.length - 1].image
+  }
+  checkLightningRound()
+}
+
 function playerOneSlap() {
   if (newGame.player1Slap() === true) {
     activeCard.src = "./assets/back.png"
-    updateDeck()
-    updatePlayer1Hand()
   } else {
     console.log('p1 can\'t slap')
   }
+  checkLightningRound()
 }
 
 function playerTwoSlap() {
   if (newGame.player2Slap() === true) {
     activeCard.src = "./assets/back.png"
-    updateDeck()
-    updatePlayer2Hand()
   } else {
     console.log('p2 can\'t slap')
   }
+  checkLightningRound()
+}
+
+function turnGameOff() {
+  var p1WinCount = document.querySelector('.p1-wins')
+  var p2WinCount = document.querySelector('.p2-wins')
+  p1WinCount.innerText = `${newGame.player1.wins} Wins`
+  p2WinCount.innerText = `${newGame.player2.wins} Wins`
+  toggleHidden(gameOn, gameOff)
 }

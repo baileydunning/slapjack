@@ -5,11 +5,6 @@
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <script type="module" src="./src/elements.js"></script>
-  <script type="module" src="./src/main.js"></script>
-  <script type="module" src="./src/player.js"></script>
-  <script type="module" src="./src/game.js"></script>
-  <script type="module" src="./src/cards.js"></script>
   <body>
     <header>
       <h1>Let's Play Slapjack!</h1>
@@ -24,8 +19,8 @@
         </div>
         <div class="player1-info hidden">
           <h2 class="player1-title">Player Name</h2>
-          <h3>0 Wins</h3>
-          <p class="player1-hand">26 in hand</p>
+          <h3 class="p1-wins">0 Wins</h3>
+          <p class="player1-hand">`26` in hand</p>
         </div>
       </div>
       <div class="middle-div">
@@ -35,14 +30,18 @@
             <h3 class="card-count">0 in deck</h3>
             <p class="player-turn">who's turn?</p>
           </div>
-          <div class="game-off flex-column">
+          <div class="game-off flex-column extra-padding">
             <h2>How To Play</h2>
-            <p>After you add both players, click "Start Game"</p>
-            <div>
-              <h3>Player One Controls</h3>
-              <p>Press "Q" to deal, "F" to slap</p>
-              <h3>Player Two Controls</h3>
-              <p>Press "P" to deal, "J" to slap</p>
+            <p>Players alternate turns but either player can slap at anytime on Jacks, Doubles & Sandwiches. In the event of a 'bad slap', the guilty player forfeits a card to the other player’s hand. When a player has no more cards in their hand, the 'lightning round' is activated. The leading player deals continuously until a Jack is played. The other player then has to slap first to continue gameplay. In the event of a 'bad slap' or failure to SlapJack, the player with all the cards wins.</p>
+            <div class="flex-row">
+              <div class="flex-column">
+                <h3 class="extra-padding">Player One Controls</h3>
+                <p>Press "P" to deal,<br> "J" to slap</p>
+              </div>
+              <div class="flex-column">
+                <h3 class="extra-padding">Player Two Controls</h3>
+                <p>Press "Q" to deal,<br> "F" to slap</p>
+              </div>
             </div>
             <button class="start-game-button">START GAME</button>
           </div>
@@ -57,21 +56,14 @@
         </div>
         <div class="player2-info hidden">
           <h2 class="player2-title">Player Name</h2>
-          <h3>0 Wins</h3>
+          <h3 class="p2-wins">0 Wins</h3>
           <p class="player2-hand">26 in hand</p>
         </div>
       </div>
     </section>
-    <footer class="footer">
-        <div class="jacks">
-          <h3>Jacks</h3>
-        </div>
-        <div class="doubles">
-          <h3>Doubles</h3>
-        </div>
-        <div class="sandwiches">
-          <h3>Sandwiches</h3>
-        </div>
-    </footer>
+    <script src="./src/main.js"></script>
+    <script src="./src/player.js"></script>
+    <script src="./src/game.js"></script>
+    <script src="./src/cards.js"></script>
   </body>
 </html>
