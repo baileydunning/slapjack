@@ -105,8 +105,17 @@ class Game {
   lightningRound() {
     if (this.cardPile[this.cardPile.length - 1].number === 11) {
       console.log('THIS CARD HAS TO BE SLAPPED')
+      setTimeout(function(){
+        if(newGame.player2.hand.length === 0) {
+          alert('P1 WINS'); }
+        }, 2000);
     } else {
-      console.log('keep dealing')
+      console.log('lightning round! keep dealing')
     }
+  }
+
+  winGame() {
+    console.log('P1 WINS')
+    this.player1.wins = 1
   }
 }
