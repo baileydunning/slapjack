@@ -47,6 +47,17 @@ class Game {
     this.player2.turn = !this.player2.turn
   }
 
+  disablePlayerDeal() {
+    if (this.cardPile.length === 0) {
+      return false
+    } else if ((this.cardPile[this.cardPile.length - 1].number === 11) && (this.triggerLightningRound() === true)) {
+      console.log('player deal is disabled')
+      return true
+    } else {
+      return false
+    }
+  }
+
   checkSlapConditions() {
     if (this.cardPile[this.cardPile.length - 1].number === 11) {
       console.log('JACK')
@@ -105,17 +116,22 @@ class Game {
   lightningRound() {
     if (this.cardPile[this.cardPile.length - 1].number === 11) {
       console.log('THIS CARD HAS TO BE SLAPPED')
-      setTimeout(function(){
-        if(newGame.player2.hand.length === 0) {
-          alert('P1 WINS'); }
-        }, 2000);
+      setTimeout(function() {
+        if(newGame.triggerLightningRound() === true) {
+          return newGame.winGame() }
+        }, 2000)
     } else {
       console.log('lightning round! keep dealing')
     }
   }
 
   winGame() {
-    console.log('P1 WINS')
-    this.player1.wins = 1
+    if (this.player1.hand.length === 0) {
+      console.log('P2 WINS')
+      this.player2.wins += 1
+    } else if (this.player2.hand.length === 0) {
+      console.log('P1 WINS')
+      this.player1.wins += 1
+    }
   }
 }

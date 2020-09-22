@@ -14,11 +14,19 @@ var activeCard = document.querySelector('.card-active')
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
     if (event.code === 'KeyQ') {
-      (newGame.player1.turn === true) ? playerOneDeal() : console.log('its not p1\'s turn')
+      if ((newGame.player1.turn === true) && (newGame.disablePlayerDeal() === false)) {
+        playerOneDeal()
+      } else {
+        console.log('its not p1\'s turn')
+      }
     } else if (event.code === 'KeyF') {
       playerOneSlap()
     } else if (event.code === 'KeyP') {
-      (newGame.player2.turn === true) ? playerTwoDeal() : console.log('its not p2\'s turn')
+      if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
+        playerTwoDeal()
+      } else {
+        console.log('its not p2\'s turn')
+      }
     } else if (event.code === 'KeyJ') {
       playerTwoSlap()
     }
