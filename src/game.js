@@ -1,7 +1,7 @@
 class Game {
   constructor(p1Name, p2Name) {
-    this.player1 = new Player(p1Name, true)
-    this.player2 = new Player(p2Name, false)
+    this.player1 = new Player('player1', p1Name, true)
+    this.player2 = new Player('player2', p2Name, false)
     this.deck = deck
     this.cardPile = []
     this.lightningRoundActivated = false
@@ -170,10 +170,12 @@ class Game {
     if (this.player1.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P2 WINS')
       this.player2.wins += 1
+      this.player2.saveWinsToStorage()
       this.startNewGame()
     } else if (this.player2.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P1 WINS')
       this.player1.wins += 1
+      this.player1.saveWinsToStorage()
       this.startNewGame()
     }
   }

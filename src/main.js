@@ -11,6 +11,7 @@ var gameOff = document.querySelector('.game-off')
 var startGameButton = document.querySelector('.start-game-button')
 var activeCard = document.querySelector('.card-active')
 
+document.addEventListener('load', retrieveWins)
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
     if (event.code === 'KeyQ') {
@@ -42,9 +43,7 @@ document.addEventListener('keyup', function() {
   }
 })
 
-startGameButton.addEventListener('click', function() {
-  startGame()
-})
+startGameButton.addEventListener('click', startGame)
 
 function addHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -66,16 +65,12 @@ function toggleHidden() {
 
 function displayPlayerOne() {
   var playerOneTitle = document.querySelector('.player1-title')
-  removeHidden(player1info)
-  addHidden(formPlayer1)
-  playerOneTitle.innerText = playerOneNameField.value
+  playerOneTitle.innerText = playerOneNameField.value || 'Player 1'
 }
 
 function displayPlayerTwo() {
   var playerTwoTitle = document.querySelector('.player2-title')
-  removeHidden(player2info)
-  addHidden(formPlayer2)
-  playerTwoTitle.innerText = playerTwoNameField.value
+  playerTwoTitle.innerText = playerTwoNameField.value || 'Player 2'
 }
 
 function startGame() {
@@ -91,11 +86,20 @@ function startGame() {
     displayPlayerOne()
     displayPlayerTwo()
     toggleHidden(gameOn)
-    addHidden(gameOff)
+    addHidden(gameOff, formPlayer1, formPlayer2)
+    removeHidden(player1info, player2info)
   } else {
     alert('add players')
   }
 }
+
+function retrieveWins() {
+  var storedPlayer1Wins = localStorage.getItem('player1Wins')
+  var storedPlayer2Wins = localStorage.getItem('player2Wins')
+  var parsedPlayer1Wins = JSON.parse(storedPlayer1Wins)
+  var parsedPlayer2Wins = JSON.parse(storedPlayer2Wins)
+}
+
 
 function displayPlayerTurn() {
   var turn = document.querySelector('.player-turn')
