@@ -11,24 +11,25 @@ var gameOff = document.querySelector('.game-off')
 var startGameButton = document.querySelector('.start-game-button')
 var activeCard = document.querySelector('.card-active')
 
+document.addEventListener('load', retrieveWins)
 document.addEventListener('keydown', function() {
   if (newGame instanceof Game) {
     if (event.code === 'KeyQ') {
       if ((newGame.player1.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerOneDeal()
-      } else {
-        console.log('its not p1\'s turn')
       }
     } else if (event.code === 'KeyF') {
-      playerOneSlap()
+      if (newGame.hasAWinner === false) {
+        playerOneSlap()
+      }
     } else if (event.code === 'KeyP') {
       if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerTwoDeal()
-      } else {
-        console.log('its not p2\'s turn')
       }
     } else if (event.code === 'KeyJ') {
-      playerTwoSlap()
+      if (newGame.hasAWinner === false) {
+        playerTwoSlap()
+      }
     }
   }
 })
@@ -42,9 +43,7 @@ document.addEventListener('keyup', function() {
   }
 })
 
-startGameButton.addEventListener('click', function() {
-  startGame()
-})
+startGameButton.addEventListener('click', startGame)
 
 function addHidden() {
   for (var i = 0; i < arguments.length; i++) {
@@ -66,16 +65,19 @@ function toggleHidden() {
 
 function displayPlayerOne() {
   var playerOneTitle = document.querySelector('.player1-title')
-  removeHidden(player1info)
-  addHidden(formPlayer1)
   playerOneTitle.innerText = playerOneNameField.value
 }
 
 function displayPlayerTwo() {
   var playerTwoTitle = document.querySelector('.player2-title')
-  removeHidden(player2info)
-  addHidden(formPlayer2)
   playerTwoTitle.innerText = playerTwoNameField.value
+}
+
+function displayWins() {
+  var p1WinCount = document.querySelector('.p1-wins')
+  var p2WinCount = document.querySelector('.p2-wins')
+  p1WinCount.innerText = `${newGame.player1.wins} Wins`
+  p2WinCount.innerText = `${newGame.player2.wins} Wins`
 }
 
 function startGame() {
@@ -83,6 +85,7 @@ function startGame() {
     var p1Name = playerOneNameField.value
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
+    displayWins()
     newGame.dealCards()
     updatePlayer1Hand()
     updatePlayer2Hand()
@@ -91,11 +94,20 @@ function startGame() {
     displayPlayerOne()
     displayPlayerTwo()
     toggleHidden(gameOn)
-    addHidden(gameOff)
+    addHidden(gameOff, formPlayer1, formPlayer2)
+    removeHidden(player1info, player2info)
   } else {
     alert('add players')
   }
 }
+
+function retrieveWins() {
+  var storedPlayer1Wins = localStorage.getItem('player1Wins')
+  var storedPlayer2Wins = localStorage.getItem('player2Wins')
+  var parsedPlayer1Wins = JSON.parse(storedPlayer1Wins)
+  var parsedPlayer2Wins = JSON.parse(storedPlayer2Wins)
+}
+
 
 function displayPlayerTurn() {
   var turn = document.querySelector('.player-turn')
@@ -148,8 +160,6 @@ function playerTwoDeal() {
 function playerOneSlap() {
   if (newGame.player1Slap() === true) {
     activeCard.src = "./assets/back.png"
-  } else {
-    console.log('p1 can\'t slap')
   }
   checkLightningRound()
 }
@@ -157,16 +167,11 @@ function playerOneSlap() {
 function playerTwoSlap() {
   if (newGame.player2Slap() === true) {
     activeCard.src = "./assets/back.png"
-  } else {
-    console.log('p2 can\'t slap')
   }
   checkLightningRound()
 }
 
 function turnGameOff() {
-  var p1WinCount = document.querySelector('.p1-wins')
-  var p2WinCount = document.querySelector('.p2-wins')
-  p1WinCount.innerText = `${newGame.player1.wins} Wins`
-  p2WinCount.innerText = `${newGame.player2.wins} Wins`
   toggleHidden(gameOn, gameOff)
+  displayWins()
 }

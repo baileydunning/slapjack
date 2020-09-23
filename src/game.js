@@ -1,10 +1,11 @@
 class Game {
   constructor(p1Name, p2Name) {
-    this.player1 = new Player(p1Name, true)
-    this.player2 = new Player(p2Name, false)
+    this.player1 = new Player('player1', p1Name, true)
+    this.player2 = new Player('player2', p2Name, false)
     this.deck = deck
     this.cardPile = []
     this.lightningRoundActivated = false
+    this.hasAWinner = false
   }
 
   shuffle(cards) {
@@ -24,6 +25,8 @@ class Game {
   }
 
   dealCards() {
+    this.player1.hand = []
+    this.player2.hand = []
     this.cardPile = this.cardPile.concat(this.deck)
     this.shuffle(this.cardPile)
     for (var i = 0; i < this.cardPile.length; i++) {
@@ -40,10 +43,14 @@ class Game {
 
   playerDeal() {
     if (this.player1.turn === true && this.player1.hand[0] !== undefined) {
-      this.cardPile.push(this.player1.hand[0])
+      if (!this.cardPile.includes(this.player1.hand[0])) {
+        this.cardPile.push(this.player1.hand[0])
+      }
     } else if (this.player2.turn === true && this.player2.hand[0] !== undefined) {
-      this.cardPile.push(this.player2.hand[0])
-    }
+        if (!this.cardPile.includes(this.player2.hand[0])) {
+          this.cardPile.push(this.player2.hand[0])
+        }
+      }
     if (this.triggerLightningRound() === false) {
       this.player1.turn = !this.player1.turn
       this.player2.turn = !this.player2.turn
@@ -54,7 +61,6 @@ class Game {
     if (this.cardPile.length === 0) {
       return false
     } else if ((this.cardPile[this.cardPile.length - 1].number === 11) && (this.triggerLightningRound() === true)) {
-      console.log('player deal is disabled')
       return true
     } else {
       return false
@@ -62,6 +68,9 @@ class Game {
   }
 
   checkSlapConditions() {
+    if (this.cardPile.length === 0) {
+      return false
+    }
     if (this.cardPile[this.cardPile.length - 1].number === 11) {
       console.log('JACK')
       return true
@@ -88,11 +97,14 @@ class Game {
       this.player2.turn = false
       return true
     } else {
-      console.log('BAD SLAP')
-      var badSlap = this.player1.hand.shift()
-      this.player2.hand.push(badSlap)
       if (this.lightningRoundActivated === true) {
         this.winGame()
+      }
+      console.log('BAD SLAP')
+      var badSlap = this.player1.hand.shift()
+      if (badSlap !== undefined) {
+        this.player2.hand.push(badSlap)
+        return false
       }
     }
   }
@@ -106,11 +118,14 @@ class Game {
       this.player1.turn = false
       return true
     } else {
-      console.log('BAD SLAP')
-      var badSlap = this.player2.hand.shift()
-      this.player1.hand.push(badSlap)
       if (this.lightningRoundActivated === true) {
         this.winGame()
+      }
+      console.log('BAD SLAP')
+      var badSlap = this.player2.hand.shift()
+      if (badSlap !== undefined) {
+        this.player1.hand.push(badSlap)
+        return false
       }
     }
   }
@@ -156,13 +171,9 @@ class Game {
          if (newGame.cardPile.length === 0) {
            clearInterval(win)
            newGame.winGame()
-         } else {
-           console.log('someone has to slap')
          }
        }, 1000)
-     } else {
-       console.log('lightning round! keep dealing')
-     }
+      }
     }
   }
 
@@ -170,17 +181,15 @@ class Game {
     if (this.player1.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P2 WINS')
       this.player2.wins += 1
-      this.startNewGame()
+      this.player2.saveWinsToStorage()
+      this.hasAWinner = true
+      turnGameOff()
     } else if (this.player2.hand.length === 0 && this.lightningRoundActivated === true) {
       console.log('P1 WINS')
       this.player1.wins += 1
-      this.startNewGame()
+      this.player1.saveWinsToStorage()
+      this.hasAWinner = true
+      turnGameOff()
     }
-  }
-
-  startNewGame() {
-    this.player1.hand = []
-    this.player2.hand = []
-    turnGameOff()
   }
 }
