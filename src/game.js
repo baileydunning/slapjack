@@ -171,6 +171,8 @@ class Game {
          if (newGame.cardPile.length === 0) {
            clearInterval(win)
            newGame.winGame()
+         } else {
+           console.log('Slap the jack')
          }
        }, 1000)
       }

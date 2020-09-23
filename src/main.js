@@ -17,18 +17,26 @@ document.addEventListener('keydown', function() {
     if (event.code === 'KeyQ') {
       if ((newGame.player1.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerOneDeal()
+      } else {
+        console.log('It\'s Player 2\'s Turn')
       }
     } else if (event.code === 'KeyF') {
       if (newGame.hasAWinner === false) {
         playerOneSlap()
+      } else {
+        console.log('Start a new game to get slappin')
       }
     } else if (event.code === 'KeyP') {
       if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerTwoDeal()
+      } else {
+        console.log('It\'s Player 1\'s Turn')
       }
     } else if (event.code === 'KeyJ') {
       if (newGame.hasAWinner === false) {
         playerTwoSlap()
+      } else {
+        console.log('Start a new game to get slappin')
       }
     }
   }
@@ -97,7 +105,7 @@ function startGame() {
     addHidden(gameOff, formPlayer1, formPlayer2)
     removeHidden(player1info, player2info)
   } else {
-    alert('add players')
+    alert('Add players to start!')
   }
 }
 
