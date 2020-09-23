@@ -22,9 +22,12 @@ For this project, I built an application to play the card game, Slapjack, from s
 + If the lightning round is activated and either player commits a bad slap, the opposing player automatically wins.
 + Wins are automatically saved to local storage, however, if the page is refreshed, the user has to enter the player names again.
 
+![ezgif-3-6a05695d0bdb](https://user-images.githubusercontent.com/67710155/93959548-2af49000-fd16-11ea-9612-4f625af811e7.gif)
+
 ## Next Steps
 + Save all player data to local storage
 + Provide a ux-friendly way to clear local storage
++ Fix all bugs
 + Refactor all code to be DRY & utilize event delegation
 
 ## Contributors
