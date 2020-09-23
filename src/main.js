@@ -17,19 +17,19 @@ document.addEventListener('keydown', function() {
     if (event.code === 'KeyQ') {
       if ((newGame.player1.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerOneDeal()
-      } else {
-        console.log('its not p1\'s turn')
       }
     } else if (event.code === 'KeyF') {
-      (newGame.hasAWinner === false) ? playerOneSlap() : console.log('start a new game')
+      if (newGame.hasAWinner === false) {
+        playerOneSlap()
+      }
     } else if (event.code === 'KeyP') {
       if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerTwoDeal()
-      } else {
-        console.log('its not p2\'s turn')
       }
     } else if (event.code === 'KeyJ') {
-      (newGame.hasAWinner === false) ? playerTwoSlap() : console.log('start a new game')
+      if (newGame.hasAWinner === false) {
+        playerTwoSlap()
+      }
     }
   }
 })
@@ -65,12 +65,12 @@ function toggleHidden() {
 
 function displayPlayerOne() {
   var playerOneTitle = document.querySelector('.player1-title')
-  playerOneTitle.innerText = playerOneNameField.value || 'Player 1'
+  playerOneTitle.innerText = playerOneNameField.value
 }
 
 function displayPlayerTwo() {
   var playerTwoTitle = document.querySelector('.player2-title')
-  playerTwoTitle.innerText = playerTwoNameField.value || 'Player 2'
+  playerTwoTitle.innerText = playerTwoNameField.value
 }
 
 function displayWins() {
@@ -160,8 +160,6 @@ function playerTwoDeal() {
 function playerOneSlap() {
   if (newGame.player1Slap() === true) {
     activeCard.src = "./assets/back.png"
-  } else {
-    console.log('p1 can\'t slap')
   }
   checkLightningRound()
 }
@@ -169,8 +167,6 @@ function playerOneSlap() {
 function playerTwoSlap() {
   if (newGame.player2Slap() === true) {
     activeCard.src = "./assets/back.png"
-  } else {
-    console.log('p2 can\'t slap')
   }
   checkLightningRound()
 }

@@ -61,7 +61,6 @@ class Game {
     if (this.cardPile.length === 0) {
       return false
     } else if ((this.cardPile[this.cardPile.length - 1].number === 11) && (this.triggerLightningRound() === true)) {
-      console.log('player deal is disabled')
       return true
     } else {
       return false
@@ -172,13 +171,9 @@ class Game {
          if (newGame.cardPile.length === 0) {
            clearInterval(win)
            newGame.winGame()
-         } else {
-           console.log('someone has to slap')
          }
        }, 1000)
-     } else {
-       console.log('lightning round! keep dealing')
-     }
+      }
     }
   }
 
