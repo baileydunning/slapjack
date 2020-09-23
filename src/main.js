@@ -21,7 +21,7 @@ document.addEventListener('keydown', function() {
         console.log('its not p1\'s turn')
       }
     } else if (event.code === 'KeyF') {
-      playerOneSlap()
+      (newGame.hasAWinner === false) ? playerOneSlap() : console.log('start a new game')
     } else if (event.code === 'KeyP') {
       if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
         playerTwoDeal()
@@ -29,7 +29,7 @@ document.addEventListener('keydown', function() {
         console.log('its not p2\'s turn')
       }
     } else if (event.code === 'KeyJ') {
-      playerTwoSlap()
+      (newGame.hasAWinner === false) ? playerTwoSlap() : console.log('start a new game')
     }
   }
 })
@@ -73,11 +73,19 @@ function displayPlayerTwo() {
   playerTwoTitle.innerText = playerTwoNameField.value || 'Player 2'
 }
 
+function displayWins() {
+  var p1WinCount = document.querySelector('.p1-wins')
+  var p2WinCount = document.querySelector('.p2-wins')
+  p1WinCount.innerText = `${newGame.player1.wins} Wins`
+  p2WinCount.innerText = `${newGame.player2.wins} Wins`
+}
+
 function startGame() {
   if (playerOneNameField.value !== '' && playerTwoNameField.value !== '') {
     var p1Name = playerOneNameField.value
     var p2Name = playerTwoNameField.value
     newGame = new Game(p1Name, p2Name)
+    displayWins()
     newGame.dealCards()
     updatePlayer1Hand()
     updatePlayer2Hand()
@@ -168,9 +176,6 @@ function playerTwoSlap() {
 }
 
 function turnGameOff() {
-  var p1WinCount = document.querySelector('.p1-wins')
-  var p2WinCount = document.querySelector('.p2-wins')
-  p1WinCount.innerText = `${newGame.player1.wins} Wins`
-  p2WinCount.innerText = `${newGame.player2.wins} Wins`
   toggleHidden(gameOn, gameOff)
+  displayWins()
 }
