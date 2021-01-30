@@ -24,7 +24,7 @@ document.addEventListener('keydown', function() {
       if (newGame.hasAWinner === false) {
         playerOneSlap()
       } else {
-        console.log('Start a new game to get slappin')
+        console.log('Start a new game to get slappin\'')
       }
     } else if (event.code === 'KeyP') {
       if ((newGame.player2.turn === true) && (newGame.disablePlayerDeal() === false)) {
@@ -36,7 +36,7 @@ document.addEventListener('keydown', function() {
       if (newGame.hasAWinner === false) {
         playerTwoSlap()
       } else {
-        console.log('Start a new game to get slappin')
+        console.log('Start a new game to get slappin\'')
       }
     }
   }
