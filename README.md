@@ -5,7 +5,8 @@
 For this project, I built an application to play the card game, Slapjack, from scratch. This game is designed for two players to compete against each other on the same desktop device. A detailed description of the project's expectations can be found [here](https://frontend.turing.io/projects/module-1/slapjack.html).
 
 ### How To Access This Application
-+ Since this is a private repository, `git clone` to local device, `cd` into the `slapjack` directory & type `open index.html` in Terminal.
++ [Github Page](https://baileydunning.github.io/slapjack/)
++ `git clone` to local device, `cd` into the `slapjack` directory & type `open index.html` in Terminal.
 
 ## Programming Languages Used
 + HTML in `index.html`

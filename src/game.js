@@ -95,9 +95,11 @@ class Game {
       this.cardPile = []
       this.player1.turn = true
       this.player2.turn = false
+      console.log('P1 SLAP')
       return true
     } else {
       if (this.lightningRoundActivated === true) {
+        console.log('Bad slap during lightning round - game over')
         this.winGame()
       }
       console.log('BAD SLAP')
@@ -116,9 +118,11 @@ class Game {
       this.cardPile = []
       this.player2.turn = true
       this.player1.turn = false
+      console.log('P2 SLAP')
       return true
     } else {
       if (this.lightningRoundActivated === true) {
+        console.log('Bad slap during lightning round - game over')
         this.winGame()
       }
       console.log('BAD SLAP')
@@ -169,8 +173,11 @@ class Game {
       if ((this.cardPile.length !== 0) && (this.cardPile[this.cardPile.length - 1].number === 11)) {
        var win = setInterval(function() {
          if (newGame.cardPile.length === 0) {
+           console.log('GAME OVER')
            clearInterval(win)
            newGame.winGame()
+         } else {
+           console.log('Slap the jack')
          }
        }, 1000)
       }
