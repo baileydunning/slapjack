@@ -79,18 +79,29 @@ button:hover {
   align-content: center;
 }
 
+input {
+  outline: none;
+}
+
 .card {
   width: 170px;
   height: 300px;
+  margin: 5%;
 }
 
 .card-active {
   width: 220px;
   height: 350px;
+  margin: 5%;
 }
 
 .game-off {
   justify-content: space-between;
+}
+
+.game-on {
+  justify-content: space-between;
+  padding: 10px 60px;
 }
 
 .extra-padding {
